@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function JsonLd() {
-  const schema = {
+  const businessSchema = {
     '@context': 'https://schema.org',
     '@graph': [
       {
@@ -55,60 +55,68 @@ export default function JsonLd() {
         },
         serviceType: 'Security Camera Installation, DVR Repair, Network Cabling',
       },
+    ],
+  };
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
       {
-        '@type': 'FAQPage',
-        '@id': 'https://aknscctvhub.com/#faq',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: 'What brands of CCTV security cameras do you sell and install in Bharatpur?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Anil Kumar & Sons sells, installs, and services all leading CCTV brands including CP Plus, Uniview (UNV), Dahua, TP-Link, D-Link, IMOU, Ezviz, Qubo, and Tenda with official manufacturer warranty support in Bharatpur.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Do you provide free site surveys for CCTV camera installation in Bharatpur?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes, Er. Rajat Garg and our technical team provide 100% free, no-obligation site surveys and custom security architecture proposals for homes, shops, offices, and factories in Bharatpur, Rajasthan.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'What services are included in CCTV Annual Maintenance Contract (AMC)?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Our AMC service covers regular DVR/NVR health audits, camera lens cleaning, cable inspections, firmware updates, and priority emergency repair support to keep your security system running 24/7.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Which is better for home security: IP Camera or Analog Camera?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Analog cameras connect via coaxial cables to a DVR recorder. IP cameras connect via network cables to an NVR, offering sharper 4K/5MP video resolution, remote mobile viewing, and AI motion alerts.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Do you repair existing CCTV systems and DVRs in Bharatpur?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes, we offer complete diagnostic repair, power supply replacement, hard disk recovery, and cable re-wiring for all types of CCTV cameras, DVRs, NVRs, EPBX intercoms, and IT network routers in Bharatpur.',
-            },
-          },
-        ],
+        '@type': 'Question',
+        name: 'What brands of security systems do you install?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'We install and support all leading brands including CP Plus, Uniview (UNV), Dahua, TP-Link, D-Link, IMOU, Ezviz, Qubo, and Tenda with official manufacturer warranties.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do you provide site surveys for installations?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes! We provide a 100% free, no-obligation site survey and consultation for homes, businesses, and industrial sites in Bharatpur.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What is covered under an Annual Maintenance Contract (AMC)?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Our security AMC covers regular hardware health checks, camera lens cleaning, cabling inspections, software/firmware updates, and priority diagnostic support to keep your systems running 24/7.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Which is the best security camera for home use?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'For home safety, you can pick IP cameras for clear HD video, or smart Wi-Fi cameras for easy control on your phone.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What is the difference between an IP camera and an analog camera?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Analog cameras connect via coaxial cables to a DVR recorder. IP cameras connect via network cables to an NVR, offering sharper HD video and smart motion alerts.',
+        },
       },
     ],
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+    </>
   );
 }
+
 
