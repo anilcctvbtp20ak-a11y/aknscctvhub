@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/'],
     },
-    sitemap: 'https://aknscctv.com/sitemap.xml',
+    sitemap: 'https://aknscctvhub.com/sitemap.xml',
   };
 }

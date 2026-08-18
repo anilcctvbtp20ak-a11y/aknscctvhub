@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://aknscctv.com'),
+  metadataBase: new URL('https://aknscctvhub.com'),
   title: {
     default: 'CCTV Camera Installation Bharatpur | Anil Kumar & Sons',
     template: '%s | Anil Kumar & Sons Bharatpur',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     'security system repair Bharatpur',
     'CCTV AMC services Bharatpur',
   ],
-  authors: [{ name: 'Er. Rajat Garg', url: 'https://aknscctv.com' }],
+  authors: [{ name: 'Er. Rajat Garg', url: 'https://aknscctvhub.com' }],
   creator: 'Anil Kumar & Sons Digital Shop',
   publisher: 'Anil Kumar & Sons Digital Shop',
   formatDetection: {
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    url: 'https://aknscctv.com/',
+    url: 'https://aknscctvhub.com/',
     siteName: 'Anil Kumar & Sons Digital Shop',
     title: 'Best CCTV Camera Installation in Bharatpur | Anil Kumar & Sons',
     description:

@@ -6,11 +6,11 @@ export default function JsonLd() {
     '@graph': [
       {
         '@type': 'LocalBusiness',
-        '@id': 'https://aknscctv.com/#business',
+        '@id': 'https://aknscctvhub.com/#business',
         name: 'Anil Kumar & Sons Digital Shop',
-        url: 'https://aknscctv.com',
-        logo: 'https://aknscctv.com/logo.png',
-        image: 'https://aknscctv.com/logo.png',
+        url: 'https://aknscctvhub.com',
+        logo: 'https://aknscctvhub.com/logo.png',
+        image: 'https://aknscctvhub.com/logo.png',
         description: 'Authorized CCTV dealer and security camera installation specialist in Bharatpur, Rajasthan. Offers IP cameras, DVR/NVR repair, IT networking, and AMC services.',
         telephone: '+918947976889',
         priceRange: '₹₹',
@@ -47,7 +47,7 @@ export default function JsonLd() {
         '@type': 'Service',
         name: 'CCTV Camera Installation & AMC Services',
         provider: {
-          '@id': 'https://aknscctv.com/#business',
+          '@id': 'https://aknscctvhub.com/#business',
         },
         areaServed: {
           '@type': 'AdministrativeArea',
@@ -65,3 +65,4 @@ export default function JsonLd() {
     />
   );
 }
+
