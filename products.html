@@ -9,14 +9,14 @@
 <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
 <link rel="shortcut icon" href="favicon/favicon.ico" />
 <link rel="manifest" href="favicon/site.webmanifest" />
-<link rel="canonical" href="https://aknscctv.com/products" />
+<link rel="canonical" href="/products" />
 <script>
   (function() {
     var link = document.querySelector('link[rel="canonical"]');
     if (link) {
       var path = window.location.pathname.replace(/\.html$/, "");
       if (path === "/index" || path === "/index.html") path = "/";
-      link.setAttribute("href", "https://aknscctv.com" + path);
+      link.setAttribute("href", window.location.origin + path);
     }
   })();
 </script>

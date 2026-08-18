@@ -1,6 +1,12 @@
 # Dependency directories
 node_modules/
 
+# Next.js build output
+.next/
+out/
+build/
+*.tsbuildinfo
+
 # Zip files
 *.zip
 
@@ -13,5 +19,7 @@ stitch_anil_kumar_sons_digital_shop/
 
 # Local configuration files
 .env
+.env*.local
 .DS_Store
 Thumbs.db
+

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" id="mainHtmlElemment">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <meta name="og:title" content="">
+    <meta name="og:url" content="">
+    <meta name="og:image" content="">
+    <meta name="og:image:url" content="">
+    <meta name="og:image:type" content=""> -->
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="facebook-domain-verification" content="rpsfygzmil2j5vcjzrf7twx03g3ccs" />
+    <!-- <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" href="assets/images/favicons/favicon-96x96.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="assets/images/favicons/favicon-96x96.png" type="image/x-icon" /> -->
+    <link id="fingersFavicon" rel="icon" type="image/x-icon" href="favicon.png">
+    <!-- Css -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.min.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/fonts/font.css?ver=20.20.2">     -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">    
+    <link rel="stylesheet" type="text/css" href="assets/css/style2.css?ver=20.20.2">
+    <link rel="stylesheet" type="text/css" href="assets/css/style3.css?ver=20.20.2">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css?ver=20.20.2">
+    <link rel="stylesheet" type="text/css" href="assets/css/media.css?ver=20.20.2">
+    <link type="text/css" rel="stylesheet" href="assets/css/jquery.fancybox.min.css" /> -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/combined.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/combined.css" /> -->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Euphoria+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mr+Dafoe&display=swap" rel="stylesheet"> -->
+    <style type="text/css">
+        .nicescroll-cursors {
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+        .ispopupopen {
+            overflow: hidden;
+            height: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        function iframeResize() {
+            var height = $('body').outerHeight();
+            parent.postMessage("resize::" + height, "*");
+        }
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-PWGMW3X');
+    </script>
+    <!-- End Google Tag Manager -->
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '332449750997464');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+    <!-- <script async src='https://www.google-analytics.com/analytics.js'></script>
+  <script>
+    window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+    ga('create', 'UA-141199787-1', 'auto');
+  </script> -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-746962687"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'AW-746962687');
+        gtag('config', 'UA-141199787-1');
+    </script>
+<link rel="stylesheet" href="styles.93cff7753ee5608f9e16.css"></head>
+<body>
+    <!-- <div id="snowflakeContainer" class="hidden">
+        <span class="snowflake"></span>
+    </div> -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWGMW3X" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <app-root></app-root>
+    <!-- Scripts -->
+    <!-- <script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/swiper.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="//unpkg.com/slick-carousel@1.8.1/slick/slick.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.js"></script>
+    <script src="assets/js/jquery.fancybox.min.js"></script> -->
+    <script src="assets/js/combined.js"></script>
+    <!-- <script src="https://spritespin.ginie.eu/spritespin.js" type="text/javascript"></script> -->
+    <!-- <script src="https://alexfox.dev/lax.js/lib/lax.min.js"></script> -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"
+        type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js" type="text/javascript"></script>
+    <script src="assets/js/spritespin.js" type="text/javascript"></script>
+    <script src="assets/js/lax.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on("focus", '.form_line', function () {
+                $(this).addClass("focused");
+            });
+            // $("html").niceScroll({
+            //   scrollspeed: 150,
+            // });
+            $(document).on("focusout", '.form_line .form-control', function () {
+                if ($(this).val() != '' && $(this).val() != undefined && $(this).val() != null) {
+                    $(this).parent().addClass("active");
+                } else {
+                    $(this).parent().removeClass("active");
+                }
+                $(this).parent().removeClass("focused");
+            });
+            function sticky_SubCategory() {
+                var window_top = $(window).scrollTop();
+                var div_top = $('#sticky-anchor');
+                if (div_top.length) {
+                    var contentNav = div_top.offset().top;
+                    if (window_top > contentNav) {
+                        $('.subCategoryWrap').addClass('subCategoryWrap_Mobile');
+                    } else {
+                        $('.subCategoryWrap').removeClass('subCategoryWrap_Mobile');
+                    }
+                }
+            }
+            if ($(window).width() < 993) {
+                $(window).scroll(function () {
+                    sticky_SubCategory();
+                });
+            }
+        });
+    </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@0.0.3/dist/confetti.browser.min.js"></script> -->
+    <script>
+        $(document).ready(function () { setInterval(iframeResize, 1000); });
+    </script>
+    <style type="text/css">
+        .sliderContent{
+            opacity: 1!important;
+        }
+    </style>
+    <!-- Chatra {literal} -->
+    <script>
+        if (window.self === window.top) {
+            (function(d, w, c) {
+                w.ChatraID = 'EhciWZnFjT97xiR6N';
+                var s = d.createElement('script');
+                w[c] = w[c] || function() {
+                    (w[c].q = w[c].q || []).push(arguments);
+                };
+                s.async = true;
+                s.src = 'https://call.chatra.io/chatra.js';
+                if (d.head) d.head.appendChild(s);
+            })(document, window, 'Chatra');
+        }
+    </script>
+    <!-- /Chatra {/literal} -->
+    <!-- <style type="text/css">
+        .whyFingersImage{
+            display: none;
+        }
+    </style> -->
+<script type="text/javascript" src="runtime.0abf26ed35be73009570.js"></script><script type="text/javascript" src="es2015-polyfills.ecae71c37d13ed78d286.js" nomodule></script><script type="text/javascript" src="polyfills.58e4918e50244e5fc458.js"></script><script type="text/javascript" src="vendor.2efcf0b31689f251ce7a.js"></script><script type="text/javascript" src="main.c3e3976618a9c57a8a87.js"></script></body>
+</html>
