@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 
 export default function Page() {
+  const [openFaqIndex, setOpenFaqIndex] = React.useState<number | null>(0);
 
   useEffect(() => {
     // Stat counters
@@ -105,17 +106,29 @@ export default function Page() {
         }
 
         featuredVideo.innerHTML = `
-          <video class="w-full h-full object-cover rounded-2xl md:rounded-3xl" autoplay muted loop playsinline id="main-cctv-video">
+          <video class="w-full h-full object-cover rounded-2xl md:rounded-3xl relative z-10" autoplay muted loop playsinline id="main-cctv-video">
             <source src="/video/cctvVideo.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          <div class="absolute bottom-3 left-3 md:bottom-6 md:left-6 flex items-center gap-2 md:gap-4 bg-navy/90 backdrop-blur-md px-3 py-2 md:px-5 md:py-3.5 rounded-xl md:rounded-2xl border border-white/10 text-white select-none transition-all duration-300 shadow-xl" id="video-volume-overlay">
-            <button class="w-8 h-8 md:w-12 md:h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-transform" id="video-volume-btn" aria-label="Toggle Sound">
-              <span class="material-symbols-outlined text-on-secondary text-base md:text-2xl" id="volume-icon" style="font-variation-settings: 'FILL' 1;">volume_off</span>
-            </button>
-            <div>
-              <p class="text-[8px] md:text-[10px] font-bold text-secondary uppercase tracking-widest mb-0.5" id="video-volume-status">Autoplay Muted</p>
-              <h3 class="font-bold text-[10px] md:text-xs md:text-sm leading-tight" id="video-volume-title">Click to Unmute</h3>
+          <div class="cctv-scan-line z-20"></div>
+          <div class="absolute top-4 right-4 z-30 bg-navy/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 text-white text-[10px] font-bold tracking-widest flex items-center gap-2 shadow-lg">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            <span class="text-secondary uppercase">● REC</span>
+            <span class="text-white/60">4K HD</span>
+          </div>
+          <div class="absolute top-4 left-4 z-20 w-6 h-6 border-t-2 border-l-2 border-white/40"></div>
+          <div class="absolute bottom-4 left-4 z-20 w-6 h-6 border-b-2 border-l-2 border-white/40"></div>
+          <div class="absolute bottom-4 right-4 z-20 w-6 h-6 border-b-2 border-r-2 border-white/40"></div>
+          <div class="absolute bottom-4 left-4 md:bottom-6 md:left-6 z-30 flex items-center gap-3.5 bg-black/60 backdrop-blur-md px-4 py-2.5 md:px-5 md:py-3.5 rounded-xl md:rounded-2xl border border-white/15 text-white select-none transition-all duration-300 shadow-xl cursor-pointer" id="video-volume-overlay">
+            <div class="relative shrink-0">
+              <div class="play-ring-pulse"></div>
+              <div class="w-9 h-9 md:w-11 md:h-11 bg-secondary text-white rounded-full flex items-center justify-center shadow-lg" id="video-volume-btn">
+                <span class="material-symbols-outlined text-white text-base md:text-xl" id="volume-icon" style="font-variation-settings: 'FILL' 1;">volume_off</span>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <p class="text-[9px] md:text-xs font-bold text-secondary uppercase tracking-widest mb-0.5" id="video-volume-status">Autoplay Muted</p>
+              <h3 class="font-bold text-xs md:text-sm leading-tight text-white" id="video-volume-title">Click to Unmute</h3>
             </div>
           </div>
         `;
@@ -323,14 +336,14 @@ export default function Page() {
     </nav>
 
     <main className="flex-grow">
-      {/*  Hero Section (Navy Background)  */}
+      {/*  Hero Section (Original Navy Background)  */}
       <section
-        className="bg-navy text-on-tertiary pt-24 pb-32 px-margin-mobile md:px-margin-desktop relative overflow-hidden"
+        className="bg-navy text-on-tertiary pt-20 pb-32 px-margin-mobile md:px-margin-desktop relative overflow-hidden"
       >
         <div
-          className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 relative z-10 items-center"
+          className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 relative z-10 items-stretch"
         >
-          <div className="md:col-span-7 flex flex-col justify-center">
+          <div className="md:col-span-7 flex flex-col justify-center py-6">
             <span
               className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block"
               >Protecting What Matters Most</span
@@ -394,33 +407,21 @@ export default function Page() {
             </div>
           </div>
 
-          {/*  Hero Image on the Right  */}
-          <div className="hidden md:flex md:col-span-5 justify-center">
-            <div
-              className="relative w-full max-w-md rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl aspect-[4/3] bg-[#122238]"
-            >
-              <img
-                height="400"
-                width="600"
-                className="w-full h-full object-cover"
-                alt="Security Camera Surveillance System"
-                src="gallery-images/hero-surveillance.jpg"
-              />
-              {/*  Decorative overlay badge  */}
-              <div
-                className="absolute top-4 right-4 bg-navy/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-[10px] font-bold tracking-widest text-secondary flex items-center gap-1.5 uppercase"
-              >
-                <span
-                  className="w-2 h-2 bg-red-500 rounded-full animate-pulse"
-                ></span>
-                Live Monitoring
-              </div>
-            </div>
+          {/*  Hero Camera Pole Image (Grounded flush to bottom)  */}
+          <div className="hidden md:flex md:col-span-5 justify-center items-end relative z-10 self-end -mb-32">
+            <img
+              height="700"
+              width="600"
+              className="h-[480px] lg:h-[580px] max-w-none w-auto object-contain object-bottom filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)] transform hover:scale-[1.01] transition-transform duration-500"
+              alt="Anil Kumar and Sons CCTV Surveillance Cameras on Pole"
+              src="/hero-cctv-pole.png"
+            />
           </div>
         </div>
-        {/*  Decorative Tech Background  */}
+
+        {/*  Decorative Tech Background (Original)  */}
         <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
+          className="absolute inset-0 opacity-15 pointer-events-none"
           style={{ 'backgroundImage': 'radial-gradient(#fff 1px, transparent 1px)', 'backgroundSize': '40px 40px' }}
         ></div>
       </section>
@@ -488,120 +489,247 @@ export default function Page() {
           </div>
         </div>
       </section>
-      {/*  Featured Video Section (Reference Design)  */}
-      <section className="py-[48px] md:py-[80px] bg-[#f4f7f5] border-b border-outline-variant px-margin-mobile md:px-margin-desktop relative">
+      {/*  Featured Video Section (Ultra Security Theme Animations)  */}
+      <section className="py-[48px] md:py-[80px] bg-[#f4f7f5] border-b border-outline-variant px-margin-mobile md:px-margin-desktop relative overflow-hidden">
         <div className="max-w-4xl mx-auto text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-secondary/10 border border-secondary/20 rounded-full text-secondary text-xs font-bold uppercase tracking-wider mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-secondary/10 border border-secondary/20 rounded-full text-secondary text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
             Featured Walkthrough
           </div>
           <h2 className="font-headline-lg text-headline-lg text-navy mb-4">
             Professional Security Installation: <span className="text-secondary border-b-2 border-secondary pb-1">See Us In Action</span>
-          <span className="sr-only">.</span></h2>          <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+          <span className="sr-only">.</span></h2>
+          <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
             Take a look at how we design, mount, and configure custom CCTV setups. We ensure high-definition surveillance with zero blind zones and expert cable management.
           </p>
         </div>
 
-        {/*  Video Player Wrapper (Facade Pattern)  */}
+        {/*  Video Player Wrapper with Ultra Security Animations  */}
         <div className="max-w-4xl mx-auto">
           <div 
-            className="relative w-full aspect-video rounded-2xl md:rounded-3xl overflow-hidden border border-outline-variant shadow-2xl bg-[#0a1628] group cursor-pointer"
+            className="relative w-full aspect-video rounded-2xl md:rounded-3xl overflow-hidden border border-outline-variant shadow-2xl bg-[#0a1628] group cursor-pointer transition-all duration-500 group-hover:shadow-[0_10px_50px_rgba(230,57,70,0.25)] group-hover:border-secondary/40"
             id="featured-video-player"
             style={{ 'transform': 'translateZ(0)', 'WebkitMaskImage': '-webkit-radial-gradient(white, black)' }}
           >
+            {/*  Animated CCTV Laser Scan Beam Line  */}
+            <div className="cctv-scan-line"></div>
+
+            {/*  Live REC 4K Security Badge Overlay  */}
+            <div className="absolute top-4 right-4 z-30 bg-navy/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 text-white text-[10px] font-bold tracking-widest flex items-center gap-2 shadow-lg">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+              <span className="text-secondary uppercase">● REC</span>
+              <span className="text-white/60">4K HD</span>
+            </div>
+
+            {/*  Camera Target Reticle Corners  */}
+            <div className="absolute top-4 left-4 z-20 w-6 h-6 border-t-2 border-l-2 border-white/40 group-hover:border-secondary transition-colors duration-300"></div>
+            <div className="absolute top-4 right-4 z-20 w-6 h-6 border-t-2 border-r-2 border-white/40 group-hover:border-secondary transition-colors duration-300"></div>
+            <div className="absolute bottom-4 left-4 z-20 w-6 h-6 border-b-2 border-l-2 border-white/40 group-hover:border-secondary transition-colors duration-300"></div>
+            <div className="absolute bottom-4 right-4 z-20 w-6 h-6 border-b-2 border-r-2 border-white/40 group-hover:border-secondary transition-colors duration-300"></div>
+
             {/*  Thumbnail Image  */}
             <img loading="lazy" 
               src="gallery-images/video-thumbnail-1.jpg" 
               alt="Security installation walkthrough demo video thumbnail" 
               width="640"
               height="360"
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 rounded-2xl md:rounded-3xl"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 rounded-2xl md:rounded-3xl"
             />
             {/*  Dark Overlay  */}
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 rounded-2xl md:rounded-3xl"></div>
+            <div className="absolute inset-0 bg-black/25 group-hover:bg-black/40 transition-colors duration-300 rounded-2xl md:rounded-3xl"></div>
 
-            {/*  Custom Play Overlay (Matching reference design)  */}
-            <div className="absolute bottom-3 left-3 md:bottom-6 md:left-6 flex items-center gap-2 md:gap-4 bg-black/40 backdrop-blur-md px-3 py-2 md:px-5 md:py-3.5 rounded-xl md:rounded-2xl border border-white/10 text-white select-none">
-              {/*  Play Button  */}
-              <button 
-                className="w-8 h-8 md:w-12 md:h-12 bg-white text-navy rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300"
-                aria-label="Play Walkthrough Video"
-              >
-                <span className="material-symbols-outlined text-navy text-base md:text-2xl" style={{ 'fontVariationSettings': '\'FILL\' 1' }}>play_arrow</span>
-              </button>
+            {/*  Custom Play Overlay with Concentric Pulsating Rings  */}
+            <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 z-30 flex items-center gap-3 md:gap-4 bg-black/50 backdrop-blur-md px-3.5 py-2.5 md:px-5 md:py-3.5 rounded-xl md:rounded-2xl border border-white/15 text-white select-none">
+              {/*  Pulsating Play Button  */}
+              <div className="relative">
+                <div className="play-ring-pulse"></div>
+                <div className="play-ring-pulse-2"></div>
+                <button 
+                  className="relative w-10 h-10 md:w-12 md:h-12 bg-secondary text-white rounded-full flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform duration-300"
+                  aria-label="Play Walkthrough Video"
+                >
+                  <span className="material-symbols-outlined text-white text-lg md:text-2xl" style={{ 'fontVariationSettings': '\'FILL\' 1' }}>play_arrow</span>
+                </button>
+              </div>
               <div>
-                <p className="text-[8px] md:text-xs font-bold text-white/60 uppercase tracking-wider mb-0.5">Walkthrough Demo</p>
-                <h3 className="font-bold text-[10px] md:text-sm md:text-base leading-tight">Live CCTV Installation Walkthrough<span className="sr-only">.</span></h3>
+                <p className="text-[9px] md:text-xs font-bold text-secondary uppercase tracking-widest mb-0.5">Live Walkthrough Demo</p>
+                <h3 className="font-bold text-xs md:text-sm md:text-base leading-tight text-white">Click to Watch Full CCTV Installation<span className="sr-only">.</span></h3>
               </div>
             </div>
           </div>
         </div>
       </section>
-      {/*  About Us Section  */}
+      {/*  About Us Section (Centered Text + Interactive Animated Highlight Badges)  */}
       <section
-        className="py-[48px] md:py-[80px] bg-background px-margin-mobile md:px-margin-desktop border-b border-outline-variant"
+        className="py-[48px] md:py-[80px] bg-surface-container-lowest px-margin-mobile md:px-margin-desktop border-b border-outline-variant relative overflow-hidden"
         id="about"
       >
-        <div className="max-w-4xl mx-auto text-center">
-          <span
-            className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block"
-            >ABOUT US</span
-          >
-          <h2 className="font-headline-lg text-headline-lg text-navy mb-6">
-            Who We Are
-          <span className="sr-only">.</span></h2>
-          <p
-            className="font-body-lg text-body-lg text-on-surface-variant mb-6 leading-relaxed"
-          >
-            At <span className="font-semibold text-navy">Anil Kumar And Sons</span>,
-            we believe security is not just about installing cameras—it’s about
-            protecting people, businesses, and peace of mind.
-          </p>
-          <p
-            className="font-body-md text-body-md text-on-surface-variant leading-relaxed"
-          >
-            With years of experience in Security Surveillance and IT Networking,
-            we provide customized security solutions backed by genuine products,
-            expert installation, and prompt technical support. Our mission is to
-            build long-term relationships by delivering quality, trust, and
-            exceptional client service.
-          </p>
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <span
+              className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-3 inline-block font-extrabold"
+              >OUR STORY &amp; MISSION</span
+            >
+            <h2 className="font-headline-lg text-3xl md:text-4xl font-extrabold text-navy mb-5">
+              Who We Are
+            <span className="sr-only">.</span></h2>
+            <p
+              className="font-body-lg text-base md:text-lg text-on-surface-variant mb-4 leading-relaxed font-medium"
+            >
+              At <span className="font-bold text-navy">Anil Kumar And Sons</span>,
+              we believe security is not just about installing cameras—it’s about
+              protecting people, businesses, and peace of mind.
+            </p>
+            <p
+              className="font-body-md text-sm md:text-base text-on-surface-variant leading-relaxed"
+            >
+              With years of experience in Security Surveillance and IT Networking,
+              we provide customized security solutions backed by genuine products,
+              expert installation, and prompt technical support. Our mission is to
+              build long-term relationships by delivering quality, trust, and
+              exceptional client service.
+            </p>
+          </div>
+
+          {/*  3 Interactive Animated Highlight Badges Spanning Full 7xl Width  */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 text-left mt-8">
+            {/*  Badge 1  */}
+            <div className="group bg-white p-7 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-5 group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shadow-sm">
+                  <span className="material-symbols-outlined text-3xl group-hover:rotate-12 transition-transform duration-300" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    workspace_premium
+                  </span>
+                </div>
+                <h3 className="font-bold text-navy text-lg mb-2 group-hover:text-secondary transition-colors">
+                  100% Genuine Products
+                </h3>
+                <p className="text-xs md:text-sm text-on-surface-variant leading-relaxed">
+                  Authorized dealer for CP Plus, Dahua, Uniview &amp; TP-Link with full manufacturer brand warranty.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-secondary">
+                <span>Authorized Hardware</span>
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              </div>
+            </div>
+
+            {/*  Badge 2  */}
+            <div className="group bg-white p-7 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-5 group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shadow-sm">
+                  <span className="material-symbols-outlined text-3xl group-hover:rotate-12 transition-transform duration-300" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    engineering
+                  </span>
+                </div>
+                <h3 className="font-bold text-navy text-lg mb-2 group-hover:text-secondary transition-colors">
+                  Certified Engineers
+                </h3>
+                <p className="text-xs md:text-sm text-on-surface-variant leading-relaxed">
+                  CP Plus CSE certified technicians providing clean PVC pipe wiring &amp; zero-blindspot camera angles.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-secondary">
+                <span>Expert Installation</span>
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              </div>
+            </div>
+
+            {/*  Badge 3  */}
+            <div className="group bg-white p-7 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-5 group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shadow-sm">
+                  <span className="material-symbols-outlined text-3xl group-hover:rotate-12 transition-transform duration-300" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    support_agent
+                  </span>
+                </div>
+                <h3 className="font-bold text-navy text-lg mb-2 group-hover:text-secondary transition-colors">
+                  Reliable After-Sales
+                </h3>
+                <p className="text-xs md:text-sm text-on-surface-variant leading-relaxed">
+                  Fast local service in Bharatpur, free mobile phone setup, password reset, and instant AMC support.
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-secondary">
+                <span>Fast Service</span>
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/*  Meet The Owner Section  */}
+      {/*  Meet The Owner Section (Ultra Leadership Frame Animations)  */}
       <section
-        className="py-[48px] md:py-[80px] bg-navy text-on-tertiary px-margin-mobile md:px-margin-desktop"
+        className="py-[48px] md:py-[80px] bg-navy text-on-tertiary px-margin-mobile md:px-margin-desktop relative overflow-hidden border-b border-white/10"
       >
+        {/* Subtle Ambient Red/Gold Radial Glow */}
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-secondary/15 rounded-full blur-3xl pointer-events-none"></div>
+
         <div
-          className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 items-center"
+          className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10"
         >
+          {/* Owner Photo Container with Glass Frame & Floating Badges */}
           <div className="md:col-span-5">
             <div
-              className="rounded-xl overflow-hidden border-4 border-surface-tint/30 relative aspect-[4/5] max-w-sm mx-auto shadow-2xl"
+              className="group relative rounded-2xl overflow-hidden border-2 border-white/20 aspect-[4/5] max-w-sm mx-auto shadow-2xl bg-navy/80 transition-all duration-500 hover:border-secondary/60 hover:shadow-[0_15px_40px_rgba(230,57,70,0.3)] cursor-pointer"
             >
+              {/* Owner Photo with Hover Scale */}
               <img loading="lazy"
                 height="1024"
                 width="801"
-                className="w-full h-full object-cover"
-                alt="Rajat Garg standing in store"
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                alt="Er Rajat Garg standing in store"
                 src="owner.jpg"
               />
+
+              {/* Floating Top Badge: 7+ Years Legacy */}
+              <div className="absolute top-4 right-4 bg-navy/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 text-white text-[10px] font-bold tracking-widest flex items-center gap-1.5 shadow-xl group-hover:border-secondary/40 transition-colors">
+                <span className="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                <span className="text-gold uppercase">7+ YRS LEGACY</span>
+              </div>
+
+              {/* Floating Bottom Badge Overlay */}
+              <div className="absolute bottom-4 left-4 right-4 bg-black/65 backdrop-blur-md p-3.5 rounded-xl border border-white/15 text-white flex items-center justify-between shadow-2xl group-hover:bg-black/80 transition-colors">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-secondary text-white rounded-full flex items-center justify-center font-bold text-sm shrink-0 shadow">
+                    <span className="material-symbols-outlined text-base">verified_user</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-white leading-tight">Er Rajat Garg</p>
+                    <p className="text-[10px] text-white/70">Proprietor &amp; Lead Engineer</p>
+                  </div>
+                </div>
+                <span className="bg-gold/20 text-gold text-[10px] font-bold px-2 py-0.5 rounded uppercase border border-gold/30">
+                  CP Plus CSE
+                </span>
+              </div>
             </div>
           </div>
+
+          {/* Owner Details & Trust Badges */}
           <div className="md:col-span-7 flex flex-col justify-center">
             <span
-              className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block font-extrabold"
-              >HIGH PRIORITY PROFILE</span
+              className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-3 inline-block font-extrabold"
+              >LEADERSHIP &amp; EXPERTISE</span
             >
-            <h2 className="font-headline-lg text-headline-lg text-white mb-2">
+            <h2 className="font-headline-lg text-3xl md:text-4xl font-extrabold text-white mb-2">
               Er Rajat Garg
             <span className="sr-only">.</span></h2>
-            <p className="text-gold font-body-lg text-body-lg mb-6 font-semibold">
+            <p className="text-gold font-body-lg text-body-lg mb-5 font-semibold flex items-center gap-2">
+              <span className="material-symbols-outlined text-gold text-lg">badge</span>
               Proprietor · Anil Kumar and Sons
             </p>
+
             <p
-              className="font-body-md text-body-md text-inverse-on-surface/80 mb-6 leading-relaxed"
+              className="font-body-md text-body-md text-inverse-on-surface/85 mb-5 leading-relaxed"
             >
               Continuing the proud legacy of Anil Kumar, I have been running
               this shop for over 7 years with a strict commitment to honesty,
@@ -609,36 +737,56 @@ export default function Page() {
               equipment; we engineer peace of mind for families and businesses
               across Bharatpur.
             </p>
-            <p className="text-gold font-bold mb-6 italic">
-              "109 people trust him on Google."
-            </p>
-            <div className="flex flex-wrap gap-4 mb-8">
-              <div
-                className="bg-surface-tint/20 px-4 py-2 rounded-lg flex items-center gap-2 border border-white/10"
-              >
-                <span className="material-symbols-outlined text-gold">star</span>
-                <span className="font-caption text-caption text-white"
-                  >5.0 Rated</span
-                >
+
+            {/* Google Trust Quote Box */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 backdrop-blur-sm flex items-center gap-3">
+              <div className="w-10 h-10 bg-gold/20 text-gold rounded-full flex items-center justify-center shrink-0">
+                <span className="material-symbols-outlined text-xl">reviews</span>
               </div>
-              <div
-                className="bg-surface-tint/20 px-4 py-2 rounded-lg flex items-center gap-2 border border-white/10"
-              >
-                <span className="material-symbols-outlined text-secondary"
-                  >handshake</span
-                >
-                <span className="font-caption text-caption text-white"
-                  >Trusted Local</span
-                >
+              <div>
+                <p className="text-white text-xs font-semibold italic">
+                  "Over 109+ families and local businesses trust Er Rajat Garg on Google Reviews with 5.0 Star Rating."
+                </p>
               </div>
             </div>
+
+            {/* Animated Interactive Stats & Rating Badges */}
+            <div className="flex flex-wrap gap-3 mb-8">
+              <div
+                className="bg-white/10 hover:bg-gold/20 px-4 py-2.5 rounded-xl flex items-center gap-2 border border-white/15 hover:border-gold/50 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer shadow-sm"
+              >
+                <span className="material-symbols-outlined text-gold text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                <span className="font-caption text-xs font-bold text-white"
+                  >5.0 Rated on Google</span
+                >
+              </div>
+              <div
+                className="bg-white/10 hover:bg-secondary/20 px-4 py-2.5 rounded-xl flex items-center gap-2 border border-white/15 hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer shadow-sm"
+              >
+                <span className="material-symbols-outlined text-secondary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>handshake</span>
+                <span className="font-caption text-xs font-bold text-white"
+                  >Trusted Local Partner</span
+                >
+              </div>
+              <div
+                className="bg-white/10 hover:bg-white/20 px-4 py-2.5 rounded-xl flex items-center gap-2 border border-white/15 hover:border-white/40 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer shadow-sm"
+              >
+                <span className="material-symbols-outlined text-white text-lg">verified</span>
+                <span className="font-caption text-xs font-bold text-white"
+                  >Certified Engineer</span>
+              </div>
+            </div>
+
+            {/* WhatsApp CTA Button with Pulse Ring Glow */}
             <a
-              className="bg-secondary text-on-secondary px-8 py-3.5 rounded-lg font-bold flex items-center gap-2 hover:brightness-95 transition-all inline-flex w-fit justify-center shadow-lg"
+              className="group relative bg-secondary text-white px-8 py-3.5 rounded-xl font-bold flex items-center gap-2.5 hover:bg-[#cf333f] transition-all inline-flex w-fit justify-center shadow-xl hover:shadow-[0_10px_30px_rgba(230,57,70,0.4)] cursor-pointer"
               href="https://wa.me/918947976889"
               target="_blank"
-             rel="noopener noreferrer">
-              <span className="material-symbols-outlined">chat</span>
-              Talk to Er Rajat on WhatsApp
+              rel="noopener noreferrer"
+            >
+              <span className="material-symbols-outlined text-white group-hover:scale-110 transition-transform">chat</span>
+              <span>Talk to Er Rajat on WhatsApp</span>
+              <span className="material-symbols-outlined text-white/70 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
             </a>
           </div>
         </div>
@@ -652,110 +800,121 @@ export default function Page() {
           <div className="text-center mb-12">
             <span
               className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block"
-              >WHY CHOOSE US</span
+              >THE ANIL KUMAR ADVANTAGE</span
             >
             <h2 className="font-headline-lg text-headline-lg text-navy">
               Why Clients Trust Us
             <span className="sr-only">.</span></h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >groups</span
-              >
-              <h4 className="font-bold text-navy mb-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {/* Card 1 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">groups</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
                 Experienced Technical Team
               <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >verified</span
-              >
-              <h4 className="font-bold text-navy mb-2">Certified Installation<span className="sr-only">.</span></h4>
+
+            {/* Card 2 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">verified</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
+                Certified Installation
+              <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >high_quality</span
-              >
-              <h4 className="font-bold text-navy mb-2">Premium Quality Products<span className="sr-only">.</span></h4>
+
+            {/* Card 3 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">high_quality</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
+                Premium Quality Products
+              <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >workspace_premium</span
-              >
-              <h4 className="font-bold text-navy mb-2">Genuine Brand Warranty<span className="sr-only">.</span></h4>
+
+            {/* Card 4 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">workspace_premium</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
+                Genuine Brand Warranty
+              <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >tune</span
-              >
-              <h4 className="font-bold text-navy mb-2">
+
+            {/* Card 5 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">tune</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
                 Customized Security Solutions
               <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >payments</span
-              >
-              <h4 className="font-bold text-navy mb-2">Affordable Pricing<span className="sr-only">.</span></h4>
+
+            {/* Card 6 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">payments</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
+                Affordable Pricing
+              <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >support_agent</span
-              >
-              <h4 className="font-bold text-navy mb-2">Quick Service Support<span className="sr-only">.</span></h4>
+
+            {/* Card 7 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">support_agent</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
+                Quick Service Support
+              <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >handyman</span
-              >
-              <h4 className="font-bold text-navy mb-2">
+
+            {/* Card 8 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">handyman</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
                 Annual Maintenance Contracts (AMC)
               <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >search</span
-              >
-              <h4 className="font-bold text-navy mb-2">Free Site Survey<span className="sr-only">.</span></h4>
+
+            {/* Card 9 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">search</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
+                Free Site Survey
+              <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
-            <div
-              className="bg-background border border-outline-variant p-6 rounded-xl text-center"
-            >
-              <span
-                className="material-symbols-outlined text-4xl text-secondary mb-3"
-                >sentiment_very_satisfied</span
-              >
-              <h4 className="font-bold text-navy mb-2">
+
+            {/* Card 10 */}
+            <div className="group bg-white border border-outline-variant p-6 rounded-2xl text-center shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between">
+              <div className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span className="material-symbols-outlined text-3xl">sentiment_very_satisfied</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
                 Client Satisfaction Guaranteed
               <span className="sr-only">.</span></h4>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-2"></div>
             </div>
           </div>
         </div>
@@ -770,7 +929,7 @@ export default function Page() {
           <div className="text-center mb-12">
             <span
               className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block"
-              >OUR SERVICES</span
+              >CORE CAPABILITIES</span
             >
             <h2 className="font-headline-lg text-headline-lg text-navy">
               Complete Security &amp; IT Solutions
@@ -779,165 +938,204 @@ export default function Page() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/*  Service 1  */}
             <div
-              className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover-lift flex flex-col justify-between"
+              className="group bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col justify-between"
             >
               <div>
                 <div
-                  className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary mb-4"
+                  className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
                 >
-                  <span className="material-symbols-outlined text-2xl"
-                    >videocam</span
-                  >
+                  <span className="material-symbols-outlined text-3xl">videocam</span>
                 </div>
-                <h3 className="font-headline-md text-lg text-navy mb-2">
+                <h3 className="font-bold text-lg text-navy mb-2 group-hover:text-secondary transition-colors">
                   CCTV Surveillance Systems
                 <span className="sr-only">.</span></h3>
-                <p className="font-body-md text-sm text-on-surface-variant mb-4">
-                  High-definition CCTV cameras for homes, offices, shops,
-                  factories, schools, hospitals, and industries.
+                <p className="font-body-md text-xs text-on-surface-variant leading-relaxed mb-4">
+                  High-definition CCTV camera setups for homes, offices, shops, factories, schools, and hospitals in Bharatpur.
                 </p>
               </div>
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-secondary">
+                <span>Book Consultation</span>
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              </div>
             </div>
+
             {/*  Service 2  */}
             <div
-              className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover-lift flex flex-col justify-between"
+              className="group bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col justify-between"
             >
               <div>
                 <div
-                  className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary mb-4"
+                  className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
                 >
-                  <span className="material-symbols-outlined text-2xl"
-                    >photo_camera</span
-                  >
+                  <span className="material-symbols-outlined text-3xl">photo_camera</span>
                 </div>
-                <h3 className="font-headline-md text-lg text-navy mb-2">
-                  IP Cameras
+                <h3 className="font-bold text-lg text-navy mb-2 group-hover:text-secondary transition-colors">
+                  AI-Enabled IP Cameras
                 <span className="sr-only">.</span></h3>
-                <p className="font-body-md text-sm text-on-surface-variant mb-4">
-                  AI-enabled IP surveillance with remote monitoring and
-                  crystal-clear video quality.
+                <p className="font-body-md text-xs text-on-surface-variant leading-relaxed mb-4">
+                  Smart AI motion-detecting IP surveillance with 4K resolution, night vision, and remote phone monitoring.
                 </p>
               </div>
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-secondary">
+                <span>Explore IP Setup</span>
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              </div>
             </div>
+
             {/*  Service 3  */}
             <div
-              className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover-lift flex flex-col justify-between"
+              className="group bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col justify-between"
             >
               <div>
                 <div
-                  className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary mb-4"
+                  className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
                 >
-                  <span className="material-symbols-outlined text-2xl">wifi</span>
+                  <span className="material-symbols-outlined text-3xl">wifi</span>
                 </div>
-                <h3 className="font-headline-md text-lg text-navy mb-2">
-                  Wi-Fi &amp; 4G Cameras
+                <h3 className="font-bold text-lg text-navy mb-2 group-hover:text-secondary transition-colors">
+                  Wi-Fi &amp; 4G SIM Cameras
                 <span className="sr-only">.</span></h3>
-                <p className="font-body-md text-sm text-on-surface-variant mb-4">
-                  Wireless cameras with mobile access from anywhere.
+                <p className="font-body-md text-xs text-on-surface-variant leading-relaxed mb-4">
+                  Wireless 360-degree rotating cameras with built-in 4G SIM slots and instant smartphone alerts.
                 </p>
               </div>
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-secondary">
+                <span>View Wireless Models</span>
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              </div>
             </div>
+
             {/*  Service 4  */}
             <div
-              className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover-lift flex flex-col justify-between"
+              className="group bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col justify-between"
             >
               <div>
                 <div
-                  className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary mb-4"
+                  className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
                 >
-                  <span className="material-symbols-outlined text-2xl"
-                    >door_front</span
-                  >
+                  <span className="material-symbols-outlined text-3xl">door_front</span>
                 </div>
-                <h3 className="font-headline-md text-lg text-navy mb-2">
-                  Video Door Phone
+                <h3 className="font-bold text-lg text-navy mb-2 group-hover:text-secondary transition-colors">
+                  Video Door Phone (VDP)
                 <span className="sr-only">.</span></h3>
-                <p className="font-body-md text-sm text-on-surface-variant mb-4">
-                  Know who’s at your door before opening it.
+                <p className="font-body-md text-xs text-on-surface-variant leading-relaxed mb-4">
+                  Two-way audio and HD video doorbells to talk and grant access to visitors safely from indoors.
                 </p>
               </div>
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-secondary">
+                <span>Check VDP Kits</span>
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              </div>
             </div>
+
             {/*  Service 5  */}
             <div
-              className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover-lift flex flex-col justify-between"
+              className="group bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col justify-between"
             >
               <div>
                 <div
-                  className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary mb-4"
+                  className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
                 >
-                  <span className="material-symbols-outlined text-2xl"
-                    >fingerprint</span
-                  >
+                  <span className="material-symbols-outlined text-3xl">fingerprint</span>
                 </div>
-                <h3 className="font-headline-md text-lg text-navy mb-2">
-                  Biometric Attendance
+                <h3 className="font-bold text-lg text-navy mb-2 group-hover:text-secondary transition-colors">
+                  Biometric Attendance Systems
                 <span className="sr-only">.</span></h3>
-                <p className="font-body-md text-sm text-on-surface-variant mb-4">
-                  Fingerprint &amp; Face Recognition attendance systems.
+                <p className="font-body-md text-xs text-on-surface-variant leading-relaxed mb-4">
+                  Fingerprint, RFID card, and AI face recognition attendance devices with automated payroll software.
                 </p>
               </div>
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-secondary">
+                <span>View Biometric Gear</span>
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              </div>
             </div>
+
             {/*  Service 6  */}
             <div
-              className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover-lift flex flex-col justify-between"
+              className="group bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col justify-between"
             >
               <div>
                 <div
-                  className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary mb-4"
+                  className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mb-4 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
                 >
-                  <span className="material-symbols-outlined text-2xl">lock</span>
+                  <span className="material-symbols-outlined text-3xl">lock</span>
                 </div>
-                <h3 className="font-headline-md text-lg text-navy mb-2">
-                  Access Control
+                <h3 className="font-bold text-lg text-navy mb-2 group-hover:text-secondary transition-colors">
+                  Smart Access Control Locks
                 <span className="sr-only">.</span></h3>
-                <p className="font-body-md text-sm text-on-surface-variant mb-4">
-                  Secure entry systems for offices, industries, schools, and
-                  institutions.
+                <p className="font-body-md text-xs text-on-surface-variant leading-relaxed mb-4">
+                  Electromagnetic &amp; digital door locks for commercial offices, banks, server rooms, and institutions.
                 </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between text-xs font-bold text-secondary">
+                <span>View Access Locks</span>
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
               </div>
             </div>
           </div>
 
-          {/*  IT Networking Highlight Box  */}
+          {/*  IT Networking Hub Box (Dark Navy Glassmorphism)  */}
           <div
-            className="mt-8 bg-surface-container-lowest p-8 rounded-xl border border-outline-variant hover-lift"
+            className="mt-10 bg-navy text-white p-8 rounded-2xl border border-white/15 shadow-2xl relative overflow-hidden group"
           >
-            <h3
-              className="font-headline-md text-navy text-xl mb-4 flex items-center gap-2"
-            >
-              <span className="material-symbols-outlined text-secondary">lan</span>
-              IT Networking
-            <span className="sr-only">.</span></h3>
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-center">
-              <div
-                className="p-3 bg-background rounded-lg text-xs font-semibold text-navy"
-              >
-                LAN Cabling
+            <div className="absolute top-0 right-0 w-80 h-80 bg-secondary/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div className="relative z-10">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-white/10 pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-secondary text-white rounded-xl flex items-center justify-center shadow">
+                    <span className="material-symbols-outlined text-xl">lan</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl text-white">
+                      Structured IT Networking &amp; Fiber Solutions
+                    </h3>
+                    <p className="text-xs text-white/70">Complete Commercial Network Architecture &amp; Rack Setup</p>
+                  </div>
+                </div>
+                <span className="bg-white/10 text-secondary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-white/15 shrink-0 w-fit">
+                  Gigabit Certified
+                </span>
               </div>
-              <div
-                className="p-3 bg-background rounded-lg text-xs font-semibold text-navy"
-              >
-                Structured Cabling
-              </div>
-              <div
-                className="p-3 bg-background rounded-lg text-xs font-semibold text-navy"
-              >
-                Network Rack Installation
-              </div>
-              <div
-                className="p-3 bg-background rounded-lg text-xs font-semibold text-navy"
-              >
-                Wi-Fi Solutions
-              </div>
-              <div
-                className="p-3 bg-background rounded-lg text-xs font-semibold text-navy"
-              >
-                Switch Configuration
-              </div>
-              <div
-                className="p-3 bg-background rounded-lg text-xs font-semibold text-navy"
-              >
-                Fiber Networking
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 text-center">
+                <div className="p-3.5 bg-white/10 hover:bg-secondary hover:text-white rounded-xl text-xs font-bold border border-white/15 transition-all duration-300 transform hover:-translate-y-1 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer">
+                  <span className="material-symbols-outlined text-sm">cable</span>
+                  LAN Cabling
+                </div>
+                <div className="p-3.5 bg-white/10 hover:bg-secondary hover:text-white rounded-xl text-xs font-bold border border-white/15 transition-all duration-300 transform hover:-translate-y-1 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer">
+                  <span className="material-symbols-outlined text-sm">account_tree</span>
+                  Structured Cabling
+                </div>
+                <div className="p-3.5 bg-white/10 hover:bg-secondary hover:text-white rounded-xl text-xs font-bold border border-white/15 transition-all duration-300 transform hover:-translate-y-1 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer">
+                  <span className="material-symbols-outlined text-sm">dns</span>
+                  Server Racks
+                </div>
+                <div className="p-3.5 bg-white/10 hover:bg-secondary hover:text-white rounded-xl text-xs font-bold border border-white/15 transition-all duration-300 transform hover:-translate-y-1 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer">
+                  <span className="material-symbols-outlined text-sm">router</span>
+                  Wi-Fi Mesh Setup
+                </div>
+                <div className="p-3.5 bg-white/10 hover:bg-secondary hover:text-white rounded-xl text-xs font-bold border border-white/15 transition-all duration-300 transform hover:-translate-y-1 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer">
+                  <span className="material-symbols-outlined text-sm">settings_ethernet</span>
+                  PoE Switches
+                </div>
+                <div className="p-3.5 bg-white/10 hover:bg-secondary hover:text-white rounded-xl text-xs font-bold border border-white/15 transition-all duration-300 transform hover:-translate-y-1 shadow-sm flex items-center justify-center gap-1.5 cursor-pointer">
+                  <span className="material-symbols-outlined text-sm">bolt</span>
+                  Fiber Splicing
+                </div>
               </div>
             </div>
           </div>
@@ -976,7 +1174,7 @@ export default function Page() {
         <div className="max-w-3xl mx-auto">
           <span
             className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block"
-            >OUR PROMISE</span
+            >OUR COMMITMENT</span
           >
           <h2 className="font-headline-lg text-3xl mb-4 text-white">
             We don’t just install security systems— We build trust.
@@ -988,91 +1186,146 @@ export default function Page() {
         </div>
       </section>
 
-      {/*  Our Work Process Section  */}
+      {/*  Our Work Process Section (Interactive Connected Stepper Animations)  */}
       <section
-        className="py-[48px] md:py-[80px] bg-surface-container-lowest px-margin-mobile md:px-margin-desktop border-b border-outline-variant"
+        className="py-[48px] md:py-[80px] bg-surface-container-lowest px-margin-mobile md:px-margin-desktop border-b border-outline-variant relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-14">
             <span
               className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block font-extrabold"
-              >WORKFLOW</span
+              >HOW WE EXECUTE</span
             >
             <h2 className="font-headline-lg text-headline-lg text-navy">
-              Our Work Process
+              Our Step-by-Step Work Process
             <span className="sr-only">.</span></h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-6 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center relative pt-4">
+            {/* Step 1 */}
             <div
-              className="p-6 bg-background border border-outline-variant rounded-xl flex flex-col items-center justify-between"
+              className="group relative bg-white p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between"
             >
-              <div
-                className="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center font-bold mb-4"
-              >
-                1
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-0.5 rounded-full shadow-md uppercase tracking-wider">
+                STEP 01
               </div>
-              <h4 className="font-bold text-navy mb-2 text-sm">Initial Consultation<span className="sr-only">.</span></h4>
+              <div
+                className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 mt-2 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-3xl">support_agent</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
+                Initial Consultation
+              <span className="sr-only">.</span></h4>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Understanding security needs &amp; site layout.
+              </p>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-3"></div>
             </div>
+
+            {/* Step 2 */}
             <div
-              className="p-6 bg-background border border-outline-variant rounded-xl flex flex-col items-center justify-between"
+              className="group relative bg-white p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between"
             >
-              <div
-                className="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center font-bold mb-4"
-              >
-                2
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-0.5 rounded-full shadow-md uppercase tracking-wider">
+                STEP 02
               </div>
-              <h4 className="font-bold text-navy mb-2 text-sm">
+              <div
+                className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 mt-2 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-3xl">travel_explore</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
                 Security Assessment
               <span className="sr-only">.</span></h4>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Free site survey &amp; camera angle planning.
+              </p>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-3"></div>
             </div>
+
+            {/* Step 3 */}
             <div
-              className="p-6 bg-background border border-outline-variant rounded-xl flex flex-col items-center justify-between"
+              className="group relative bg-white p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between"
             >
-              <div
-                className="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center font-bold mb-4"
-              >
-                3
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-0.5 rounded-full shadow-md uppercase tracking-wider">
+                STEP 03
               </div>
-              <h4 className="font-bold text-navy mb-2 text-sm">
+              <div
+                className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 mt-2 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-3xl">architecture</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
                 Customized Solution
               <span className="sr-only">.</span></h4>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Selecting brand &amp; transparent quotation.
+              </p>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-3"></div>
             </div>
+
+            {/* Step 4 */}
             <div
-              className="p-6 bg-background border border-outline-variant rounded-xl flex flex-col items-center justify-between"
+              className="group relative bg-white p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between"
             >
-              <div
-                className="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center font-bold mb-4"
-              >
-                4
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-0.5 rounded-full shadow-md uppercase tracking-wider">
+                STEP 04
               </div>
-              <h4 className="font-bold text-navy mb-2 text-sm">
-                Professional Installation
+              <div
+                className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 mt-2 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-3xl">engineering</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
+                Professional Setup
               <span className="sr-only">.</span></h4>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Clean PVC pipe wiring &amp; expert mounting.
+              </p>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-3"></div>
             </div>
+
+            {/* Step 5 */}
             <div
-              className="p-6 bg-background border border-outline-variant rounded-xl flex flex-col items-center justify-between"
+              className="group relative bg-white p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between"
             >
-              <div
-                className="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center font-bold mb-4"
-              >
-                5
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-0.5 rounded-full shadow-md uppercase tracking-wider">
+                STEP 05
               </div>
-              <h4 className="font-bold text-navy mb-2 text-sm">
+              <div
+                className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 mt-2 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-3xl">checklist</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
                 Testing &amp; Training
               <span className="sr-only">.</span></h4>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Mobile app setup &amp; client walkthrough.
+              </p>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-3"></div>
             </div>
+
+            {/* Step 6 */}
             <div
-              className="p-6 bg-background border border-outline-variant rounded-xl flex flex-col items-center justify-between"
+              className="group relative bg-white p-6 rounded-2xl border border-outline-variant shadow-sm hover:shadow-2xl hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col items-center justify-between"
             >
-              <div
-                className="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center font-bold mb-4"
-              >
-                6
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-[10px] font-black px-3 py-0.5 rounded-full shadow-md uppercase tracking-wider">
+                STEP 06
               </div>
-              <h4 className="font-bold text-navy mb-2 text-sm">
+              <div
+                className="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center mb-4 mt-2 group-hover:bg-secondary group-hover:text-white group-hover:rotate-6 transition-all duration-300 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-3xl">headset_mic</span>
+              </div>
+              <h4 className="font-bold text-navy text-sm mb-1 group-hover:text-secondary transition-colors">
                 After Sales Support
               <span className="sr-only">.</span></h4>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Warranty support &amp; fast site visits.
+              </p>
+              <div className="w-0 group-hover:w-10 h-1 bg-secondary rounded-full transition-all duration-300 mt-3"></div>
             </div>
           </div>
         </div>
@@ -1085,7 +1338,7 @@ export default function Page() {
         <div className="max-w-7xl mx-auto px-4 mb-6 text-center">
           <span
             className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-2 inline-block"
-            >PARTNERS</span
+            >AUTHORIZED HARDWARE</span
           >
           <h3 className="text-lg font-bold text-navy">Brands We Deal In<span className="sr-only">.</span></h3>
         </div>
@@ -1577,408 +1830,331 @@ export default function Page() {
         </div>
       </section>
 
-      {/*  Our Commitment Section  */}
-      <section
-        className="py-12 bg-surface-container-lowest border-b border-outline-variant"
-      >
-        <div className="max-w-5xl mx-auto text-center">
-          <span
-            className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block"
-            >OUR COMMITMENT</span
-          >
-          <div
-            className="flex flex-wrap justify-center gap-4 text-sm font-bold text-navy"
-          >
-            <span
-              className="px-5 py-2 bg-background border border-outline-variant rounded-full"
-              >✔ Quality</span
-            >
-            <span
-              className="px-5 py-2 bg-background border border-outline-variant rounded-full"
-              >✔ Trust</span
-            >
-            <span
-              className="px-5 py-2 bg-background border border-outline-variant rounded-full"
-              >✔ Technology</span
-            >
-            <span
-              className="px-5 py-2 bg-background border border-outline-variant rounded-full"
-              >✔ Service</span
-            >
-            <span
-              className="px-5 py-2 bg-background border border-outline-variant rounded-full"
-              >✔ Client Satisfaction</span
-            >
-          </div>
-        </div>
-      </section>
 
-      {/*  Our Valued Clients  */}
+
+      {/*  Our Valued Clients (Glassmorphism & Live Active Badges)  */}
       <section
-        className="py-[48px] md:py-[80px] bg-surface-container-lowest px-margin-mobile md:px-margin-desktop border-b border-outline-variant"
+        className="py-[48px] md:py-[80px] bg-surface-container-lowest px-margin-mobile md:px-margin-desktop border-b border-outline-variant relative overflow-hidden"
         id="clients"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-14">
             <span
-              className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block font-extrabold"
-              >TRUSTED BY</span
+              className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-3 inline-block font-extrabold"
+              >PROVEN TRACK RECORD</span
             >
-            <h2 className="font-headline-lg text-headline-lg text-navy">
-              Our Valued Clients
+            <h2 className="font-headline-lg text-3xl md:text-4xl font-extrabold text-navy mb-3">
+              Our Valued Clients &amp; Key Deployments
             <span className="sr-only">.</span></h2>
-            <p className="text-secondary-label text-sm mt-2 max-w-2xl mx-auto">
-              We are proud to have deployed secure, high-performance technology
-              solutions for leading institutions, commercial enterprises, and
-              industrial facilities in Bharatpur and surrounding regions.
+            <p className="text-on-surface-variant text-sm max-w-2xl mx-auto leading-relaxed">
+              We are proud to have deployed secure, high-performance security &amp; IT infrastructure for 100+ leading institutions, resorts, factories, and commercial enterprises in Bharatpur.
             </p>
           </div>
 
-          {/*  Ongoing Projects (Running Clients)  */}
-          <div className="mb-12">
-            <h4
-              className="text-xs font-bold uppercase tracking-wider text-secondary mb-4 flex items-center gap-2"
-            >
-              <span
-                className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"
-              ></span>
-              Active Integrations / Running Clients
-            <span className="sr-only">.</span></h4>
+          {/*  Ongoing Projects (Running Live Clients)  */}
+          <div className="mb-14">
+            <div className="flex items-center justify-between mb-5 border-b border-outline-variant/40 pb-3">
+              <h4
+                className="text-xs font-bold uppercase tracking-wider text-navy flex items-center gap-2"
+              >
+                <span
+                  className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"
+                ></span>
+                <span>Active Live Integrations / Running Clients</span>
+              <span className="sr-only">.</span></h4>
+              <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                24/7 LIVE SUPPORT
+              </span>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/*  Mukund Resort  */}
               <div
-                className="relative bg-white rounded-2xl border border-emerald-200 shadow-sm p-6 flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition-all duration-300"
+                className="group relative bg-white rounded-2xl border-2 border-emerald-300/80 shadow-md p-6 flex flex-col justify-between hover:border-emerald-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-3">
                     <span
-                      className="text-[10px] font-bold text-emerald-600 tracking-wider uppercase bg-emerald-50 px-2 py-0.5 rounded"
+                      className="text-[10px] font-bold text-emerald-700 tracking-wider uppercase bg-emerald-100/70 px-2.5 py-1 rounded-full border border-emerald-200"
                       >Resort &amp; Hospitality</span
                     >
                     <span
-                      className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 shadow-sm"
                     >
                       <span
-                        className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"
+                        className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"
                       ></span>
-                      Running Client
+                      Active Client
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-navy">
+                  <h3 className="text-xl font-extrabold text-navy flex items-center gap-2">
+                    <span className="material-symbols-outlined text-emerald-600">hotel</span>
                     Mukund Resort
-                    <span className="text-xs text-secondary-label font-normal"
+                    <span className="text-xs text-on-surface-variant font-medium"
                       >(Bharatpur)</span
                     >
                   <span className="sr-only">.</span></h3>
-                  <p className="text-secondary-label text-xs mt-1.5">
-                    Ongoing deployment of enterprise-grade security cameras and
-                    optical fiber network connectivity.
+                  <p className="text-on-surface-variant text-xs mt-2 leading-relaxed">
+                    Full deployment of enterprise-grade CCTV security cameras, high-capacity NVR storage, and optical fiber network connectivity.
                   </p>
                 </div>
               </div>
+
               {/*  Ananta Resort  */}
               <div
-                className="relative bg-white rounded-2xl border border-emerald-200 shadow-sm p-6 flex flex-col justify-between hover:border-emerald-400 hover:shadow-md transition-all duration-300"
+                className="group relative bg-white rounded-2xl border-2 border-emerald-300/80 shadow-md p-6 flex flex-col justify-between hover:border-emerald-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-3">
                     <span
-                      className="text-[10px] font-bold text-emerald-600 tracking-wider uppercase bg-emerald-50 px-2 py-0.5 rounded"
+                      className="text-[10px] font-bold text-emerald-700 tracking-wider uppercase bg-emerald-100/70 px-2.5 py-1 rounded-full border border-emerald-200"
                       >Resort &amp; Hospitality</span
                     >
                     <span
-                      className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 shadow-sm"
                     >
                       <span
-                        className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"
+                        className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"
                       ></span>
-                      Running Client
+                      Active Client
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-navy">
+                  <h3 className="text-xl font-extrabold text-navy flex items-center gap-2">
+                    <span className="material-symbols-outlined text-emerald-600">villa</span>
                     Ananta Resort
-                    <span className="text-xs text-secondary-label font-normal"
+                    <span className="text-xs text-on-surface-variant font-medium"
                       >(VMD Resort)</span
                     >
                   <span className="sr-only">.</span></h3>
-                  <p className="text-secondary-label text-xs mt-1.5">
-                    Deployment of centralized CCTV surveillance network and
-                    high-capacity wireless link systems.
+                  <p className="text-on-surface-variant text-xs mt-2 leading-relaxed">
+                    Deployment of centralized CCTV surveillance network and long-range high-speed wireless outdoor link systems.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/*  Categorized Client List Grid  */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/*  Categorized Client List Grid (Top 4 Categories)  */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             {/*  Category: Food & Confectionery  */}
             <div
-              className="bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="group bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-2xl hover:border-secondary/40 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer"
             >
-              <div className="flex items-center gap-3 mb-4 text-navy">
-                <span className="material-symbols-outlined text-2xl"
-                  >restaurant</span
-                >
-                <h4 className="font-bold text-sm uppercase tracking-wide">
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-outline-variant/30 text-navy">
+                <div className="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                  <span className="material-symbols-outlined text-xl">restaurant</span>
+                </div>
+                <h4 className="font-bold text-sm text-navy uppercase tracking-wide group-hover:text-secondary transition-colors">
                   Food &amp; Sweets
                 <span className="sr-only">.</span></h4>
               </div>
-              <ul className="space-y-2 text-xs text-secondary-label">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Saini Madhur vyjan
+              <ul className="space-y-2.5 text-xs text-on-surface-variant">
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span>
+                  Saini Madhur Vyjan
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Saini mithas
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span>
+                  Saini Mithas
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Saini sweets
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span>
+                  Saini Sweets
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span>
                   AKSHAR FOOD
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span>
                   Sai Bakery
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span>
                   Standard Bakery
-                <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  SENCTURY GREEN RESORT
                 <span className="sr-only">.</span></li>
               </ul>
             </div>
 
             {/*  Category: Educational Institutions  */}
             <div
-              className="bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="group bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-2xl hover:border-secondary/40 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer"
             >
-              <div className="flex items-center gap-3 mb-4 text-navy">
-                <span className="material-symbols-outlined text-2xl">school</span>
-                <h4 className="font-bold text-sm uppercase tracking-wide">
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-outline-variant/30 text-navy">
+                <div className="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                  <span className="material-symbols-outlined text-xl">school</span>
+                </div>
+                <h4 className="font-bold text-sm text-navy uppercase tracking-wide group-hover:text-secondary transition-colors">
                   Education
                 <span className="sr-only">.</span></h4>
               </div>
-              <ul className="space-y-2 text-xs text-secondary-label">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> Sony
-                  World School
+              <ul className="space-y-2.5 text-xs text-on-surface-variant">
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Sony World School
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> Sony
-                  convent school
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Sony Convent School
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> Sony
-                  coaching
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Sony Coaching
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> A K
-                  M SCHOOL
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> A K M School
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Antriksh Academy
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Antriksh Academy
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Spectrum Academy
-                <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Sony Tower School
-                <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Doodle Play School
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Spectrum Academy
                 <span className="sr-only">.</span></li>
               </ul>
             </div>
 
             {/*  Category: Retailers & Jewellers  */}
             <div
-              className="bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="group bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-2xl hover:border-secondary/40 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer"
             >
-              <div className="flex items-center gap-3 mb-4 text-navy">
-                <span className="material-symbols-outlined text-2xl"
-                  >storefront</span
-                >
-                <h4 className="font-bold text-sm uppercase tracking-wide">
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-outline-variant/30 text-navy">
+                <div className="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                  <span className="material-symbols-outlined text-xl">storefront</span>
+                </div>
+                <h4 className="font-bold text-sm text-navy uppercase tracking-wide group-hover:text-secondary transition-colors">
                   Jewellers &amp; Retail
                 <span className="sr-only">.</span></h4>
               </div>
-              <ul className="space-y-2 text-xs text-secondary-label">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  TILKDHARI jewellers
+              <ul className="space-y-2.5 text-xs text-on-surface-variant">
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Tilkdhari Jewellers
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> R K
-                  JEWELLERS
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> R K Jewellers
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  GOYAL ABHUSHARN
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Goyal Abhusharn
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  GOYAL ORNAMENT
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Goyal Ornament
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  AMARCHAND AKHALESH KUMAR
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Amarchand Akhalesh Kumar
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> BABU
-                  LAAL BHAGWAN DAAS
-                <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> JB
-                  STORE
-                <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Royal Furniture
-                <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Royal Sari Emporium
-                <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Lokesh Traders
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Royal Furniture &amp; Sari
                 <span className="sr-only">.</span></li>
               </ul>
             </div>
 
-            {/*  Category: Hospitality, Industrial & Corporate  */}
+            {/*  Category: Factories & Industry  */}
             <div
-              className="bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="group bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-2xl hover:border-secondary/40 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer"
             >
-              <div className="flex items-center gap-3 mb-4 text-navy">
-                <span className="material-symbols-outlined text-2xl">domain</span>
-                <h4 className="font-bold text-sm uppercase tracking-wide">
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-outline-variant/30 text-navy">
+                <div className="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                  <span className="material-symbols-outlined text-xl">domain</span>
+                </div>
+                <h4 className="font-bold text-sm text-navy uppercase tracking-wide group-hover:text-secondary transition-colors">
                   Factories &amp; Industry
                 <span className="sr-only">.</span></h4>
               </div>
-              <ul className="space-y-2 text-xs text-secondary-label">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  SAKUN OIL MIL
+              <ul className="space-y-2.5 text-xs text-on-surface-variant">
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Sakun Oil Mill
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  MANISH OIL MIL
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Manish Oil Mill
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> POLY
-                  PAICK FACTORY
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Poly Pack Factory
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  SUMAN KAMAL FACTORY
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Suman Kamal Factory
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  AGARWAL WHEREHOUSE
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Agarwal Warehouse
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Agarwal Marble
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Agarwal Marble
                 <span className="sr-only">.</span></li>
               </ul>
             </div>
           </div>
 
           {/*  Secondary Client Row (Automotive, Healthcare, Electric)  */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {/*  Category: Automotive  */}
             <div
-              className="bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="group bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-2xl hover:border-secondary/40 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer"
             >
-              <div className="flex items-center gap-3 mb-4 text-navy">
-                <span className="material-symbols-outlined text-2xl"
-                  >directions_car</span
-                >
-                <h4 className="font-bold text-sm uppercase tracking-wide">
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-outline-variant/30 text-navy">
+                <div className="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                  <span className="material-symbols-outlined text-xl">directions_car</span>
+                </div>
+                <h4 className="font-bold text-sm text-navy uppercase tracking-wide group-hover:text-secondary transition-colors">
                   Automotive Showrooms
                 <span className="sr-only">.</span></h4>
               </div>
-              <ul className="space-y-2 text-xs text-secondary-label">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  JINDAL HONDA
+              <ul className="space-y-2.5 text-xs text-on-surface-variant">
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Jindal Honda
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> TVS
-                  AUTOMOBILE WORKSHOP
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> TVS Automobile Workshop
+                <span className="sr-only">.</span></li>
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Shivam Motors
                 <span className="sr-only">.</span></li>
               </ul>
             </div>
 
             {/*  Category: Healthcare  */}
             <div
-              className="bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="group bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-2xl hover:border-secondary/40 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer"
             >
-              <div className="flex items-center gap-3 mb-4 text-navy">
-                <span className="material-symbols-outlined text-2xl"
-                  >local_hospital</span
-                >
-                <h4 className="font-bold text-sm uppercase tracking-wide">
-                  Healthcare
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-outline-variant/30 text-navy">
+                <div className="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                  <span className="material-symbols-outlined text-xl">local_hospital</span>
+                </div>
+                <h4 className="font-bold text-sm text-navy uppercase tracking-wide group-hover:text-secondary transition-colors">
+                  Healthcare &amp; Clinics
                 <span className="sr-only">.</span></h4>
               </div>
-              <ul className="space-y-2 text-xs text-secondary-label">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  PRADEEP HOSPITAL
+              <ul className="space-y-2.5 text-xs text-on-surface-variant">
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Pradeep Hospital
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Dr. Moresh Agarwal
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Dr. Moresh Agarwal Clinic
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Dr. Deepak Singhal Eye Care
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Dr. Deepak Singhal Eye Care
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Dr. Yogesh Agarwal
-                <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  Ekansh Diagnostic Centre
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Ekansh Diagnostic Centre
                 <span className="sr-only">.</span></li>
               </ul>
             </div>
 
             {/*  Category: Electrical & Services  */}
             <div
-              className="bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="group bg-white rounded-2xl border border-outline-variant p-6 shadow-sm hover:shadow-2xl hover:border-secondary/40 transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer"
             >
-              <div className="flex items-center gap-3 mb-4 text-navy">
-                <span className="material-symbols-outlined text-2xl"
-                  >electric_bolt</span
-                >
-                <h4 className="font-bold text-sm uppercase tracking-wide">
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-outline-variant/30 text-navy">
+                <div className="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                  <span className="material-symbols-outlined text-xl">electric_bolt</span>
+                </div>
+                <h4 className="font-bold text-sm text-navy uppercase tracking-wide group-hover:text-secondary transition-colors">
                   Electrical Services
                 <span className="sr-only">.</span></h4>
               </div>
-              <ul className="space-y-2 text-xs text-secondary-label">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span> BESL
-                  ELECTRIC SERVICES
+              <ul className="space-y-2.5 text-xs text-on-surface-variant">
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> BESL Electric Services
                 <span className="sr-only">.</span></li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-navy/40"></span>
-                  TANEJA ELECTRICAL
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Taneja Electricals
+                <span className="sr-only">.</span></li>
+                <li className="flex items-center gap-2.5 font-medium hover:text-secondary transition-colors">
+                  <span className="h-1.5 w-1.5 rounded-full bg-secondary shrink-0"></span> Bansal Hardware &amp; Trade
                 <span className="sr-only">.</span></li>
               </ul>
             </div>
@@ -1995,7 +2171,7 @@ export default function Page() {
           <div className="text-center mb-12">
             <span
               className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-4 inline-block font-extrabold"
-              >GALLERY</span
+              >ON-SITE PORTFOLIO</span
             >
             <h2 className="font-headline-lg text-headline-lg text-navy">
               Real Project Gallery
@@ -2175,7 +2351,7 @@ export default function Page() {
           <div className="text-center mb-10">
             <span
               className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-2 inline-block"
-              >REVIEWS</span
+              >CUSTOMER FEEDBACK</span
             >
             <h2 className="font-headline-lg text-headline-lg text-navy mb-4">
               Google Client Reviews
@@ -2188,163 +2364,163 @@ export default function Page() {
         </div>
       </section>
 
-      {/*  FAQ Section  */}
+      {/*  FAQ Section (React Controlled Accordion)  */}
       <section
         className="py-[48px] md:py-[80px] bg-surface-container-lowest px-margin-mobile md:px-margin-desktop border-b border-outline-variant"
       >
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <span
-              className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-2 inline-block"
-              >FAQS</span
+              className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-2 inline-block font-extrabold"
+              >GOT QUESTIONS?</span
             >
             <h2 className="font-headline-lg text-headline-lg text-navy mb-4">
               Frequently Asked Questions
             <span className="sr-only">.</span></h2>
           </div>
+
           <div className="space-y-4">
-            {/*  FAQ Item 1  */}
+            {/* FAQ Item 1 */}
             <div
-              className="faq-item bg-background border border-outline-variant rounded-lg overflow-hidden transition-all duration-300"
+              className={`bg-white border rounded-2xl overflow-hidden transition-all duration-300 shadow-sm ${
+                openFaqIndex === 0 ? 'border-secondary shadow-lg' : 'border-outline-variant hover:border-secondary/50'
+              }`}
             >
               <button
-                className="faq-trigger w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors"
-                aria-expanded="false"
+                type="button"
+                onClick={() => setOpenFaqIndex(openFaqIndex === 0 ? null : 0)}
+                className="w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors cursor-pointer"
+                aria-expanded={openFaqIndex === 0}
               >
-                <span>What brands do you deal in?</span>
+                <span className="text-base text-navy font-bold">What brands do you deal in?</span>
                 <span
-                  className="material-symbols-outlined transform transition-transform duration-300 text-secondary faq-icon"
-                  >expand_more</span
+                  className={`material-symbols-outlined transform transition-transform duration-300 text-secondary text-2xl ${
+                    openFaqIndex === 0 ? 'rotate-180 text-secondary' : 'rotate-0 text-navy/60'
+                  }`}
                 >
+                  expand_more
+                </span>
               </button>
-              <div
-                className="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
-              >
-                <div
-                  className="p-5 pt-0 border-t border-outline-variant/10 text-sm text-on-surface-variant"
-                >
-                  We stock CP Plus, Uniview (UNV), Dahua, TP-Link, D-Link, IMOU,
-                  Ezviz, Qubo, Maxemus, Tenda, Mantra, and other premium brands
-                  with genuine warranties.
+              {openFaqIndex === 0 && (
+                <div className="px-5 pb-5 pt-1 border-t border-outline-variant/30 text-sm text-on-surface-variant leading-relaxed animate-fadeIn">
+                  We stock CP Plus, Uniview (UNV), Dahua, TP-Link, D-Link, IMOU, Ezviz, Qubo, Maxemus, Tenda, Mantra, and other premium security &amp; IT brands with genuine manufacturer warranties.
                 </div>
-              </div>
+              )}
             </div>
-            {/*  FAQ Item 2  */}
+
+            {/* FAQ Item 2 */}
             <div
-              className="faq-item bg-background border border-outline-variant rounded-lg overflow-hidden transition-all duration-300"
+              className={`bg-white border rounded-2xl overflow-hidden transition-all duration-300 shadow-sm ${
+                openFaqIndex === 1 ? 'border-secondary shadow-lg' : 'border-outline-variant hover:border-secondary/50'
+              }`}
             >
               <button
-                className="faq-trigger w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors"
-                aria-expanded="false"
+                type="button"
+                onClick={() => setOpenFaqIndex(openFaqIndex === 1 ? null : 1)}
+                className="w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors cursor-pointer"
+                aria-expanded={openFaqIndex === 1}
               >
-                <span>Do you charge for site survey?</span>
+                <span className="text-base text-navy font-bold">Do you charge for site survey?</span>
                 <span
-                  className="material-symbols-outlined transform transition-transform duration-300 text-secondary faq-icon"
-                  >expand_more</span
+                  className={`material-symbols-outlined transform transition-transform duration-300 text-secondary text-2xl ${
+                    openFaqIndex === 1 ? 'rotate-180 text-secondary' : 'rotate-0 text-navy/60'
+                  }`}
                 >
+                  expand_more
+                </span>
               </button>
-              <div
-                className="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
-              >
-                <div
-                  className="p-5 pt-0 border-t border-outline-variant/10 text-sm text-on-surface-variant"
-                >
-                  No, we provide a 100% free site survey and consultation
-                  without any obligation in Bharatpur.
+              {openFaqIndex === 1 && (
+                <div className="px-5 pb-5 pt-1 border-t border-outline-variant/30 text-sm text-on-surface-variant leading-relaxed animate-fadeIn">
+                  No! We provide a 100% free site survey, camera positioning advice, and transparent quotation without any obligation across Bharatpur.
                 </div>
-              </div>
+              )}
             </div>
-            {/*  FAQ Item 3  */}
+
+            {/* FAQ Item 3 */}
             <div
-              className="faq-item bg-background border border-outline-variant rounded-lg overflow-hidden transition-all duration-300"
+              className={`bg-white border rounded-2xl overflow-hidden transition-all duration-300 shadow-sm ${
+                openFaqIndex === 2 ? 'border-secondary shadow-lg' : 'border-outline-variant hover:border-secondary/50'
+              }`}
             >
               <button
-                className="faq-trigger w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors"
-                aria-expanded="false"
+                type="button"
+                onClick={() => setOpenFaqIndex(openFaqIndex === 2 ? null : 2)}
+                className="w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors cursor-pointer"
+                aria-expanded={openFaqIndex === 2}
               >
-                <span>What is the warranty on camera setups?</span>
+                <span className="text-base text-navy font-bold">What is the warranty on camera setups?</span>
                 <span
-                  className="material-symbols-outlined transform transition-transform duration-300 text-secondary faq-icon"
-                  >expand_more</span
+                  className={`material-symbols-outlined transform transition-transform duration-300 text-secondary text-2xl ${
+                    openFaqIndex === 2 ? 'rotate-180 text-secondary' : 'rotate-0 text-navy/60'
+                  }`}
                 >
+                  expand_more
+                </span>
               </button>
-              <div
-                className="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
-              >
-                <div
-                  className="p-5 pt-0 border-t border-outline-variant/10 text-sm text-on-surface-variant"
-                >
-                  Surveillance equipment generally carries a standard 1-2 years
-                  manufacturer brand warranty, and we provide complete support.
+              {openFaqIndex === 2 && (
+                <div className="px-5 pb-5 pt-1 border-t border-outline-variant/30 text-sm text-on-surface-variant leading-relaxed animate-fadeIn">
+                  Surveillance equipment generally carries a standard 1-2 years brand warranty. In addition, we provide complete post-installation technical service support.
                 </div>
-              </div>
+              )}
             </div>
-            {/*  FAQ Item 4  */}
+
+            {/* FAQ Item 4 */}
             <div
-              className="faq-item bg-background border border-outline-variant rounded-lg overflow-hidden transition-all duration-300"
+              className={`bg-white border rounded-2xl overflow-hidden transition-all duration-300 shadow-sm ${
+                openFaqIndex === 3 ? 'border-secondary shadow-lg' : 'border-outline-variant hover:border-secondary/50'
+              }`}
             >
               <button
-                className="faq-trigger w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors"
-                aria-expanded="false"
+                type="button"
+                onClick={() => setOpenFaqIndex(openFaqIndex === 3 ? null : 3)}
+                className="w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors cursor-pointer"
+                aria-expanded={openFaqIndex === 3}
               >
+                <span className="text-base text-navy font-bold">Which is the best security camera for home use?</span>
                 <span
-                  >Which is the best security camera for home use? (Best Home
-                  Security Camera)</span
+                  className={`material-symbols-outlined transform transition-transform duration-300 text-secondary text-2xl ${
+                    openFaqIndex === 3 ? 'rotate-180 text-secondary' : 'rotate-0 text-navy/60'
+                  }`}
                 >
-                <span
-                  className="material-symbols-outlined transform transition-transform duration-300 text-secondary faq-icon"
-                  >expand_more</span
-                >
+                  expand_more
+                </span>
               </button>
-              <div
-                className="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
-              >
-                <div
-                  className="p-5 pt-0 border-t border-outline-variant/10 text-sm text-on-surface-variant"
-                >
-                  For home security, there are two primary options: 1)
-                  <strong>IP Cameras (Network Security)</strong> like 2MP/3MP/4MP/5MP/6MP/8MP
-                  cameras from CP Plus, Dahua, or Uniview that offer
-                  high-definition night vision and real-time mobile app alerts.
-                  2) <strong>Smart Wi-Fi Cameras</strong> like PTZ Wi-Fi cameras
-                  from Imou, Ezviz, or Qubo, which are wireless and allow you to
-                  rotate and control them directly from your phone. You can
-                  consult with us at +91 89479 76889 to select the perfect setup
-                  for your home.
+              {openFaqIndex === 3 && (
+                <div className="px-5 pb-5 pt-1 border-t border-outline-variant/30 text-sm text-on-surface-variant leading-relaxed animate-fadeIn space-y-2">
+                  <p>For home security, there are two primary options:</p>
+                  <p>1) <strong>IP Cameras (Network Security)</strong> like 2MP/3MP/4MP/5MP/6MP/8MP cameras from CP Plus, Dahua, or Uniview that offer HD night vision and real-time mobile app alerts.</p>
+                  <p>2) <strong>Smart Wi-Fi &amp; 4G SIM Cameras</strong> like 360-degree PTZ cameras from Imou, Ezviz, or Qubo, which allow direct smartphone rotation control.</p>
+                  <p>Call or WhatsApp us at <strong>+91 89479 76889</strong> for personalized recommendations.</p>
                 </div>
-              </div>
+              )}
             </div>
-            {/*  FAQ Item 5  */}
+
+            {/* FAQ Item 5 */}
             <div
-              className="faq-item bg-background border border-outline-variant rounded-lg overflow-hidden transition-all duration-300"
+              className={`bg-white border rounded-2xl overflow-hidden transition-all duration-300 shadow-sm ${
+                openFaqIndex === 4 ? 'border-secondary shadow-lg' : 'border-outline-variant hover:border-secondary/50'
+              }`}
             >
               <button
-                className="faq-trigger w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors"
-                aria-expanded="false"
+                type="button"
+                onClick={() => setOpenFaqIndex(openFaqIndex === 4 ? null : 4)}
+                className="w-full flex justify-between items-center p-5 text-left font-bold text-navy focus:outline-none hover:bg-surface-container-low transition-colors cursor-pointer"
+                aria-expanded={openFaqIndex === 4}
               >
+                <span className="text-base text-navy font-bold">What is the difference between an IP Camera and an Analog Camera?</span>
                 <span
-                  >What is the difference between an IP Camera and an Analog
-                  Camera? (IP Camera vs Analog Camera)</span
+                  className={`material-symbols-outlined transform transition-transform duration-300 text-secondary text-2xl ${
+                    openFaqIndex === 4 ? 'rotate-180 text-secondary' : 'rotate-0 text-navy/60'
+                  }`}
                 >
-                <span
-                  className="material-symbols-outlined transform transition-transform duration-300 text-secondary faq-icon"
-                  >expand_more</span
-                >
+                  expand_more
+                </span>
               </button>
-              <div
-                className="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
-              >
-                <div
-                  className="p-5 pt-0 border-t border-outline-variant/10 text-sm text-on-surface-variant"
-                >
-                  Analog cameras are connected to a DVR (Digital Video Recorder)
-                  via coaxial cables and are more budget-friendly. IP cameras
-                  connect to an NVR (Network Video Recorder) using network
-                  cables (LAN/PoE), offering ultra-high-definition video quality
-                  and advanced AI-based smart alerts such as motion detection
-                  and line crossing detection.
+              {openFaqIndex === 4 && (
+                <div className="px-5 pb-5 pt-1 border-t border-outline-variant/30 text-sm text-on-surface-variant leading-relaxed animate-fadeIn">
+                  Analog cameras connect to a DVR via coaxial cables and are budget-friendly. IP cameras connect to an NVR via network cables (Cat6 / PoE), offering 4K video clarity, remote IP monitoring, and advanced AI smart motion detection.
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -2360,7 +2536,7 @@ export default function Page() {
           <div>
             <span
               className="font-section-tagline text-section-tagline text-secondary uppercase tracking-widest mb-2 inline-block"
-              >CONTACT US</span
+              >GET IN TOUCH</span
             >
             <h2 className="font-headline-lg text-headline-lg text-navy mb-4">
               Looking for a Reliable Security Partner?
@@ -2380,7 +2556,7 @@ export default function Page() {
                 className="bg-[#25D366] text-white px-6 py-2.5 rounded-lg font-bold text-xs"
                 href="https://wa.me/918947976889"
                 target="_blank"
-                 rel="noopener noreferrer">WhatsApp Us</a
+                rel="noopener noreferrer">WhatsApp Us</a
               >
             </div>
 
@@ -2418,26 +2594,46 @@ export default function Page() {
           <div
             className="flex flex-col justify-between bg-surface-container-lowest p-6 rounded-xl border border-outline-variant"
           >
-            <div className="mb-4">
-              <h4 className="font-bold text-navy mb-1">Our Location Address<span className="sr-only">.</span></h4>
-              <p className="text-sm text-on-surface-variant">
-                Anil Kumar &amp; Sons, Inside B. Narayan Gate, Near SBI Bank,
-                Bahanera Wale, Bharatpur, Rajasthan - 321001
-              </p>
+            <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h4 className="font-bold text-navy mb-1">Our Location Address<span className="sr-only">.</span></h4>
+                <p className="text-sm text-on-surface-variant">
+                  Anil Kumar &amp; Sons, Inside B. Narayan Gate, Near SBI Bank,
+                  Bahanera Wale, Bharatpur, Rajasthan - 321001
+                </p>
+              </div>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Anil+kumar+and+Sons+(+Bahanera+wale+)+Bharatpur"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 bg-[#e63946] text-white px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap hover:bg-[#cf333f] transition-colors shrink-0 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-sm">near_me</span>
+                Open Maps
+              </a>
             </div>
-            <div
-              className="h-64 rounded-lg overflow-hidden border border-outline-variant bg-white/10"
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Anil+kumar+and+Sons+(+Bahanera+wale+)+Bharatpur"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block relative h-64 rounded-lg overflow-hidden border border-outline-variant bg-white/10 group cursor-pointer"
+              title="Click to open store location in Google Maps"
             >
               <iframe
+                title="Store Location Map"
                 allowFullScreen={true}
                 height="100%"
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14163.660604245995!2d77.48475631720831!3d27.21228678072081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3973a38cd16599ad%3A0xc6fb69ec264662d5!2sMathura%20Gate%2C%20Bharatpur%2C%20Rajasthan%20321001!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                style={{ 'border': '0' }}
+                referrerPolicy="strict-origin-when-cross-origin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3372.6618781201437!2d77.49321747523537!3d27.21208167647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3973a30d1e8b672b%3A0x251227a6a12ebdb0!2sAnil%20kumar%20and%20Sons%20(%20Bahanera%20wale%20)!5e1!3m2!1sen!2sin!4v1787155780030!5m2!1sen!2sin"
+                style={{ 'border': '0', 'pointerEvents': 'none' }}
                 width="100%"
               ></iframe>
-            </div>
+              <div className="absolute bottom-3 left-3 bg-navy/90 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-lg border border-white/10 flex items-center gap-1.5 shadow-md group-hover:bg-navy transition-all">
+                <span className="material-symbols-outlined text-secondary text-sm">open_in_new</span>
+                <span>Click to open in Google Maps</span>
+              </div>
+            </a>
           </div>
         </div>
       </section>
@@ -2463,15 +2659,15 @@ export default function Page() {
         >
           {/*  Brand  */}
           <div>
-            <div className="bg-white p-3 rounded-xl inline-block shadow-md mb-3">
+            <a className="flex items-center gap-2 mb-3 inline-block" href="/">
               <img loading="lazy"
                 height="724"
                 width="1024"
                 src="logo.png"
                 alt="ANIL KUMAR &amp; SONS"
-                className="h-20 w-auto object-contain"
+                className="h-20 w-auto object-contain py-1"
               />
-            </div>
+            </a>
             <p
               className="text-xs text-on-primary-container/70 mt-1 leading-relaxed"
             >
