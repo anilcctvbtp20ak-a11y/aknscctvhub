@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: '%s | Anil Kumar & Sons Bharatpur',
   },
   description:
-    'Professional CCTV camera installation in Bharatpur. Anil Kumar & Sons offers security cameras, IP systems, IT networking, and AMC maintenance by Er. Rajat Garg.',
+    'Professional CCTV camera installation in Bharatpur. Security cameras, IP systems, IT networking, and AMC maintenance by Er. Rajat Garg.',
   keywords: [
     'CCTV camera installation Bharatpur',
     'CCTV dealer in Bharatpur',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: '/',
+    canonical: 'https://aknscctvhub.com/',
   },
   openGraph: {
     type: 'website',

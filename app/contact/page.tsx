@@ -157,47 +157,47 @@ export default function ContactPage() {
               We are here to assist you in designing custom HD CCTV camera setups, AI IP surveillance, optical fiber networks, and smart biometric locks in Bharatpur. Speak directly with <strong className="text-white">Er. Rajat Garg</strong> for expert site guidance and transparent quotations.
             </p>
 
-            {/*  Interactive Status Pills  */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-8">
-              <span className="bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-xl border border-white/15 flex items-center gap-2 backdrop-blur-md shadow-sm">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                Open All 7 Days • 9:30 AM to 7:30 PM
+            {/*  Interactive Status Pills (Compact Responsive Grid for Mobile)  */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-6 max-w-3xl">
+              <span className="bg-white/10 text-white text-[11px] sm:text-xs font-bold px-3 py-2 rounded-xl border border-white/15 flex items-center justify-center gap-1.5 backdrop-blur-md shadow-sm text-center">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                <span>Open 7 Days: 9:30AM–7:30PM</span>
               </span>
-              <span className="bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-xl border border-white/15 flex items-center gap-2 backdrop-blur-md shadow-sm">
-                <span className="material-symbols-outlined text-gold text-base">verified</span>
-                100% Free Site Survey in Bharatpur
+              <span className="bg-white/10 text-white text-[11px] sm:text-xs font-bold px-3 py-2 rounded-xl border border-white/15 flex items-center justify-center gap-1.5 backdrop-blur-md shadow-sm text-center">
+                <span className="material-symbols-outlined text-gold text-sm shrink-0">verified</span>
+                <span>Free Site Survey in Bharatpur</span>
               </span>
-              <span className="bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-xl border border-white/15 flex items-center gap-2 backdrop-blur-md shadow-sm">
-                <span className="material-symbols-outlined text-secondary text-base">speed</span>
-                Same-Day Technical Support
+              <span className="bg-white/10 text-white text-[11px] sm:text-xs font-bold px-3 py-2 rounded-xl border border-white/15 flex items-center justify-center gap-1.5 backdrop-blur-md shadow-sm text-center">
+                <span className="material-symbols-outlined text-secondary text-sm shrink-0">speed</span>
+                <span>Same-Day Technical Support</span>
               </span>
             </div>
 
-            {/*  Hero Action Buttons Strip  */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+            {/*  Hero Action Buttons Grid (2-Column Mobile Grid)  */}
+            <div className="grid grid-cols-2 md:flex md:flex-wrap items-center justify-center md:justify-start gap-2.5 max-w-2xl">
               <a
                 href="tel:+918947976889"
-                className="bg-secondary text-white px-7 py-3.5 rounded-xl font-bold hover:bg-[#cf333f] transition-all shadow-lg flex items-center gap-2 transform hover:-translate-y-0.5"
+                className="bg-secondary text-white px-3 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-bold hover:bg-[#cf333f] transition-all shadow-lg flex items-center justify-center gap-1.5 text-center transform hover:-translate-y-0.5"
               >
-                <span className="material-symbols-outlined text-lg">call</span>
-                <span>Call Engineer: +91 89479 76889</span>
+                <span className="material-symbols-outlined text-base">call</span>
+                <span>Call Engineer</span>
               </a>
               <a
                 href="https://wa.me/918947976889"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#25D366] text-white px-7 py-3.5 rounded-xl font-bold hover:brightness-105 transition-all shadow-lg flex items-center gap-2 transform hover:-translate-y-0.5"
+                className="bg-[#25D366] text-white px-3 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-bold hover:brightness-105 transition-all shadow-lg flex items-center justify-center gap-1.5 text-center transform hover:-translate-y-0.5"
               >
-                <span className="material-symbols-outlined text-lg">chat</span>
+                <span className="material-symbols-outlined text-base">chat</span>
                 <span>WhatsApp Er Rajat</span>
               </a>
               <a
                 href="https://www.google.com/maps/search/?api=1&query=Anil+kumar+and+Sons+(+Bahanera+wale+)+Bharatpur"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white/10 text-white hover:bg-white/20 px-6 py-3.5 rounded-xl font-bold border border-white/20 transition-all flex items-center gap-2"
+                className="col-span-2 md:col-auto bg-white/10 text-white hover:bg-white/20 px-4 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-bold border border-white/20 transition-all flex items-center justify-center gap-1.5 text-center"
               >
-                <span className="material-symbols-outlined text-gold text-lg">location_on</span>
+                <span className="material-symbols-outlined text-gold text-base">location_on</span>
                 <span>Get Store Location Pin</span>
               </a>
             </div>

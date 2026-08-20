@@ -347,6 +347,8 @@ export default function Page() {
                     <img
                       src={video.thumb}
                       alt={video.title}
+                      width={640}
+                      height={360}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-primary/30 group-hover:bg-primary/10 transition-colors flex items-center justify-center">
@@ -408,6 +410,8 @@ export default function Page() {
                     <img
                       src={photo.src}
                       alt={photo.title}
+                      width={600}
+                      height={450}
                       loading="lazy"
                       className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
                     />
@@ -516,6 +520,8 @@ export default function Page() {
               <img
                 src={selectedPhoto.src}
                 alt={selectedPhoto.title}
+                width={1200}
+                height={900}
                 className="max-w-full max-h-[65vh] object-contain rounded-lg shadow-lg"
               />
             </div>

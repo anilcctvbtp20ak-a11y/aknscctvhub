@@ -349,12 +349,12 @@ export default function Page() {
               >Protecting What Matters Most</span
             >
             <h1
-              className="font-display-hero text-[32px] sm:text-[40px] md:text-display-hero mb-6"
+              className="font-display-hero text-[32px] sm:text-[40px] md:text-display-hero mb-6 font-black tracking-tight text-white leading-tight"
             >
               CCTV Installation &amp; Smart Security Solutions
             <span className="sr-only">.</span></h1>
             <p
-              className="font-body-lg text-body-lg text-inverse-on-surface/80 mb-8 max-w-2xl"
+              className="font-body-lg text-body-lg text-inverse-on-surface/80 mb-8 max-w-2xl leading-relaxed"
             >
               We provide end-to-end security solutions with premium products,
               expert installation, and reliable after-sales support. From homes
@@ -363,47 +363,50 @@ export default function Page() {
               technology.
             </p>
 
-            {/*  Bullet checklist  */}
+            {/*  Bullet checklist (Compact Responsive 2-Column Mobile Grid)  */}
             <div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 text-inverse-on-surface/90 font-medium"
+              className="grid grid-cols-2 gap-2.5 mb-8 text-inverse-on-surface/90 font-semibold text-xs sm:text-sm"
             >
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-secondary"
+              <div className="flex items-center gap-1.5 bg-white/5 p-2 rounded-xl border border-white/10 shadow-sm">
+                <span className="material-symbols-outlined text-secondary text-base shrink-0"
                   >check_circle</span
                 >
-                <span>✔ Free Site Survey</span>
+                <span>Free Site Survey</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-secondary"
+              <div className="flex items-center gap-1.5 bg-white/5 p-2 rounded-xl border border-white/10 shadow-sm">
+                <span className="material-symbols-outlined text-secondary text-base shrink-0"
                   >check_circle</span
                 >
-                <span>✔ Professional Installation</span>
+                <span>Professional Install</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-secondary"
+              <div className="flex items-center gap-1.5 bg-white/5 p-2 rounded-xl border border-white/10 shadow-sm">
+                <span className="material-symbols-outlined text-secondary text-base shrink-0"
                   >check_circle</span
                 >
-                <span>✔ Genuine Products</span>
+                <span>Genuine Products</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-secondary"
+              <div className="flex items-center gap-1.5 bg-white/5 p-2 rounded-xl border border-white/10 shadow-sm">
+                <span className="material-symbols-outlined text-secondary text-base shrink-0"
                   >check_circle</span
                 >
-                <span>✔ Reliable After-Sales Support</span>
+                <span>After-Sales Support</span>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            {/*  Hero Buttons (2-Column Grid on Mobile, Flex on Desktop)  */}
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3">
               <a
-                className="bg-secondary text-on-secondary px-8 py-3 rounded-lg font-bold hover:brightness-90 transition-all shadow-md inline-block text-center"
+                className="bg-secondary text-on-secondary px-4 sm:px-8 py-3 rounded-xl font-bold hover:brightness-90 transition-all shadow-md text-center text-xs sm:text-base flex items-center justify-center gap-1.5"
                 href="/contact"
-                >Get Free Consultation</a
               >
+                <span>Free Consultation</span>
+              </a>
               <a
-                className="bg-transparent border-2 border-outline-variant text-on-tertiary px-8 py-3 rounded-lg font-bold hover:bg-outline-variant hover:text-navy transition-all inline-block text-center"
+                className="bg-transparent border-2 border-outline-variant text-on-tertiary px-4 sm:px-8 py-3 rounded-xl font-bold hover:bg-outline-variant hover:text-navy transition-all text-center text-xs sm:text-base flex items-center justify-center gap-1.5"
                 href="/contact"
-                >Contact Us</a
               >
+                <span>Contact Us</span>
+              </a>
             </div>
           </div>
 
@@ -685,7 +688,7 @@ export default function Page() {
               <img loading="lazy"
                 height="1024"
                 width="801"
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover object-[65%_20%] transform group-hover:scale-105 transition-transform duration-700"
                 alt="Er Rajat Garg standing in store"
                 src="owner.jpg"
               />
@@ -749,37 +752,37 @@ export default function Page() {
                 </p>
               </div>
             </div>
-
-            {/* Animated Interactive Stats & Rating Badges */}
-            <div className="flex flex-wrap gap-3 mb-8">
+                     {/*  Animated Interactive Stats & Rating Badges (Compact Mobile Grid)  */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-8">
               <div
-                className="bg-white/10 hover:bg-gold/20 px-4 py-2.5 rounded-xl flex items-center gap-2 border border-white/15 hover:border-gold/50 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer shadow-sm"
+                className="bg-white/10 hover:bg-gold/20 px-3 sm:px-4 py-2.5 rounded-xl flex items-center justify-center gap-1.5 border border-white/15 hover:border-gold/50 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer shadow-sm text-center"
               >
-                <span className="material-symbols-outlined text-gold text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                <span className="font-caption text-xs font-bold text-white"
+                <span className="material-symbols-outlined text-gold text-base shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                <span className="font-caption text-[11px] sm:text-xs font-bold text-white leading-tight"
                   >5.0 Rated on Google</span
                 >
               </div>
               <div
-                className="bg-white/10 hover:bg-secondary/20 px-4 py-2.5 rounded-xl flex items-center gap-2 border border-white/15 hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer shadow-sm"
+                className="bg-white/10 hover:bg-secondary/20 px-3 sm:px-4 py-2.5 rounded-xl flex items-center justify-center gap-1.5 border border-white/15 hover:border-secondary/50 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer shadow-sm text-center"
               >
-                <span className="material-symbols-outlined text-secondary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>handshake</span>
-                <span className="font-caption text-xs font-bold text-white"
+                <span className="material-symbols-outlined text-secondary text-base shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>handshake</span>
+                <span className="font-caption text-[11px] sm:text-xs font-bold text-white leading-tight"
                   >Trusted Local Partner</span
                 >
               </div>
               <div
-                className="bg-white/10 hover:bg-white/20 px-4 py-2.5 rounded-xl flex items-center gap-2 border border-white/15 hover:border-white/40 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer shadow-sm"
+                className="col-span-2 sm:col-auto bg-white/10 hover:bg-white/20 px-3 sm:px-4 py-2.5 rounded-xl flex items-center justify-center gap-1.5 border border-white/15 hover:border-white/40 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer shadow-sm text-center"
               >
-                <span className="material-symbols-outlined text-white text-lg">verified</span>
-                <span className="font-caption text-xs font-bold text-white"
-                  >Certified Engineer</span>
+                <span className="material-symbols-outlined text-white text-base shrink-0">verified</span>
+                <span className="font-caption text-[11px] sm:text-xs font-bold text-white leading-tight"
+                  >Certified Engineer</span
+                >
               </div>
             </div>
 
-            {/* WhatsApp CTA Button with Pulse Ring Glow */}
+            {/*  WhatsApp CTA Button  */}
             <a
-              className="group relative bg-secondary text-white px-8 py-3.5 rounded-xl font-bold flex items-center gap-2.5 hover:bg-[#cf333f] transition-all inline-flex w-fit justify-center shadow-xl hover:shadow-[0_10px_30px_rgba(230,57,70,0.4)] cursor-pointer"
+              className="group relative bg-secondary text-white px-6 sm:px-8 py-3.5 rounded-xl font-bold flex items-center gap-2.5 hover:bg-[#cf333f] transition-all w-full sm:w-fit justify-center shadow-xl hover:shadow-[0_10px_30px_rgba(230,57,70,0.4)] cursor-pointer text-xs sm:text-base text-center"
               href="https://wa.me/918947976889"
               target="_blank"
               rel="noopener noreferrer"
