@@ -1,3 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -5,4 +12,4 @@
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self' https: http:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.elfsight.com https://elfsight.com https://*.elfsight.com https://elfsightcdn.com https://*.elfsightcdn.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src 'self' https://static.elfsight.com https://elfsight.com https://*.elfsight.com https://www.google.com; connect-src 'self' https:;"
+    Content-Security-Policy = "default-src 'self' https: http:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.elfsight.com https://elfsight.com https://*.elfsight.com https://elfsightcdn.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src 'self' https://static.elfsight.com https://elfsight.com https://*.elfsight.com https://www.google.com; connect-src 'self' https:;"
