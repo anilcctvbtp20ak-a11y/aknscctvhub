@@ -17,6 +17,16 @@ export const metadata: Metadata = {
   },
   description:
     'Professional CCTV camera installation in Bharatpur. Security cameras, IP systems, IT networking, and AMC maintenance by Er. Rajat Garg.',
+  icons: {
+    icon: [
+      { url: '/favicon/favicon.ico' },
+      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon/favicon.ico',
+    apple: '/favicon/apple-touch-icon.png',
+  },
+  manifest: '/favicon/site.webmanifest',
   keywords: [
     'CCTV camera installation Bharatpur',
     'CCTV dealer in Bharatpur',
